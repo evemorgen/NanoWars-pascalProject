@@ -14,6 +14,7 @@ nastepny : pOnBubble;
 end;
 
 var bubbleList : pOnBubble;
+var bubbleCount : integer;
 
 procedure printBubble(lista:pOnBubble);
 var kopia : pOnBubble;
@@ -123,6 +124,63 @@ begin
 end;
 
 
+procedure checkBubble(listeczka:pOnBubble);
+var pomoc : pOnBubble;
+    i     : integer;
+    z     : integer;
+begin
+     repeat
+     z := 0;
+     i := 1;
+     pomoc := listeczka;
+     while pomoc <> nil do
+           begin
+           if (pomoc^.posX > pomoc^.destX - 10) and (pomoc^.posX < pomoc^.destX + 10) and (pomoc^.posY > pomoc^.destY - 10) and (pomoc^.posY < pomoc^.destY + 10) then
+              begin
+              z := i;
+              break;
+              end;
+           pomoc := pomoc^.nastepny;
+           i := i+1;
+           end;
+     if z <> 0 then
+        begin
+        if komorkiNaPlanszy[pomoc^.fromNr].ID <> komorkiNaPlanszy[pomoc^.toNr].ID then komorkiNaPlanszy[pomoc^.toNr].punkty := komorkiNaPlanszy[pomoc^.toNr].punkty - pomoc^.punkty
+                                                                                  else komorkiNaPlanszy[pomoc^.toNr].punkty := komorkiNaPlanszy[pomoc^.toNr].punkty + pomoc^.punkty;
+        if komorkiNaPlanszy[pomoc^.toNr].punkty < 0 then begin komorkiNaPlanszy[pomoc^.toNr].ID := 1-komorkiNaPlanszy[pomoc^.toNr].ID; komorkiNaPlanszy[pomoc^.toNr].punkty := (-1)*(komorkiNaPlanszy[pomoc^.toNr].punkty); end;
+        popBubble(listeczka,z);
+        end;
+     until z=0;
+end;
 
+procedure drawBubble(var listeczka:pOnBubble);
+var pomoc : pOnBubble;
+begin
+     pomoc := listeczka;
+     while pomoc <> nil do
+           begin
+           al_circlefill(buffer,pomoc^.posX,pomoc^.posY,10,al_makecol(255,255,255));
+           pomoc := pomoc^.nastepny;
+           end;
+end;
+
+procedure updateBubble(var listeczka: pOnBubble);
+var pomoc : pOnBubble;
+begin
+     pomoc := listeczka;
+     while pomoc <> nil do
+           begin
+           if (komorkiNaPlanszy[pomoc^.toNr].posX+30) - (komorkiNaPlanszy[pomoc^.fromNr].posX+30) <> 0 then
+              begin
+              pomoc^.posX := pomoc^.posX + pomoc^.incDecX;
+              pomoc^.posY := (komorkiNaPlanszy[pomoc^.toNr].posY+30) - (komorkiNaPlanszy[pomoc^.fromNr].posY+30);
+              pomoc^.posY := pomoc^.posY * (pomoc^.posX - (komorkiNaPlanszy[pomoc^.fromNr].posX+30));
+              pomoc^.posY := pomoc^.posY div ((komorkiNaPlanszy[pomoc^.toNr].posX+30) - (komorkiNaPlanszy[pomoc^.fromNr].posX+30));
+              pomoc^.posY := pomoc^.posY + komorkiNaPlanszy[pomoc^.fromNr].posY + 30;
+              end;
+           pomoc := pomoc^.nastepny;
+           end;
+
+end;
 
 

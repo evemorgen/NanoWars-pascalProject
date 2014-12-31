@@ -9,12 +9,11 @@
         <Filename Value="test1.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="test1"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="162"/>
-        <CursorPos X="34" Y="192"/>
-        <UsageCount Value="95"/>
+        <TopLine Value="92"/>
+        <CursorPos X="31" Y="166"/>
+        <UsageCount Value="97"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -48,7 +47,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="24" Y="9"/>
-        <UsageCount Value="31"/>
+        <UsageCount Value="32"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
@@ -58,17 +57,18 @@
         <WindowIndex Value="0"/>
         <TopLine Value="65"/>
         <CursorPos X="20" Y="74"/>
-        <UsageCount Value="31"/>
+        <UsageCount Value="32"/>
         <Loaded Value="True"/>
       </Unit5>
       <Unit6>
         <Filename Value="NWbubbleList.pas"/>
         <UnitName Value="NWbubbleList"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="39" Y="125"/>
-        <UsageCount Value="20"/>
+        <TopLine Value="123"/>
+        <CursorPos X="27" Y="127"/>
+        <UsageCount Value="21"/>
         <Loaded Value="True"/>
       </Unit6>
     </Units>
@@ -78,123 +78,123 @@
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="test1.lpr"/>
-        <Caret Line="119" Column="239" TopLine="110"/>
+        <Caret Line="183" Column="13" TopLine="165"/>
       </Position1>
       <Position2>
         <Filename Value="test1.lpr"/>
-        <Caret Line="101" Column="9" TopLine="89"/>
+        <Caret Line="9" Column="7" TopLine="1"/>
       </Position2>
       <Position3>
         <Filename Value="test1.lpr"/>
-        <Caret Line="119" Column="99" TopLine="110"/>
+        <Caret Line="22" Column="7" TopLine="6"/>
       </Position3>
       <Position4>
         <Filename Value="test1.lpr"/>
-        <Caret Line="123" Column="170" TopLine="110"/>
+        <Caret Line="48" Column="43" TopLine="32"/>
       </Position4>
       <Position5>
         <Filename Value="test1.lpr"/>
-        <Caret Line="183" Column="13" TopLine="165"/>
+        <Caret Line="65" Column="91" TopLine="49"/>
       </Position5>
       <Position6>
         <Filename Value="test1.lpr"/>
-        <Caret Line="9" Column="7" TopLine="1"/>
+        <Caret Line="148" Column="40" TopLine="134"/>
       </Position6>
       <Position7>
         <Filename Value="test1.lpr"/>
-        <Caret Line="22" Column="7" TopLine="6"/>
+        <Caret Line="102" Column="8" TopLine="92"/>
       </Position7>
       <Position8>
         <Filename Value="test1.lpr"/>
-        <Caret Line="48" Column="43" TopLine="32"/>
+        <Caret Line="104" Column="9" TopLine="92"/>
       </Position8>
       <Position9>
         <Filename Value="test1.lpr"/>
-        <Caret Line="65" Column="91" TopLine="49"/>
+        <Caret Line="106" Column="122" TopLine="95"/>
       </Position9>
       <Position10>
         <Filename Value="test1.lpr"/>
-        <Caret Line="148" Column="40" TopLine="134"/>
+        <Caret Line="150" Column="166" TopLine="108"/>
       </Position10>
       <Position11>
         <Filename Value="test1.lpr"/>
-        <Caret Line="102" Column="8" TopLine="92"/>
+        <Caret Line="40" Column="16" TopLine="30"/>
       </Position11>
       <Position12>
         <Filename Value="test1.lpr"/>
-        <Caret Line="104" Column="9" TopLine="92"/>
+        <Caret Line="122" Column="142" TopLine="113"/>
       </Position12>
       <Position13>
         <Filename Value="test1.lpr"/>
-        <Caret Line="106" Column="122" TopLine="95"/>
+        <Caret Line="176" Column="14" TopLine="167"/>
       </Position13>
       <Position14>
         <Filename Value="test1.lpr"/>
-        <Caret Line="150" Column="166" TopLine="108"/>
+        <Caret Line="230" Column="10" TopLine="215"/>
       </Position14>
       <Position15>
-        <Filename Value="test1.lpr"/>
-        <Caret Line="40" Column="16" TopLine="30"/>
+        <Filename Value="NWbubbleList.pas"/>
+        <Caret Line="27" Column="16" TopLine="1"/>
       </Position15>
       <Position16>
-        <Filename Value="test1.lpr"/>
-        <Caret Line="122" Column="142" TopLine="113"/>
+        <Filename Value="NWbubbleList.pas"/>
+        <Caret Line="104" Column="28" TopLine="84"/>
       </Position16>
       <Position17>
-        <Filename Value="test1.lpr"/>
-        <Caret Line="176" Column="14" TopLine="167"/>
+        <Filename Value="NWbubbleList.pas"/>
+        <Caret Line="105" Column="90" TopLine="84"/>
       </Position17>
       <Position18>
         <Filename Value="test1.lpr"/>
-        <Caret Line="230" Column="10" TopLine="215"/>
+        <Caret Line="111" Column="123" TopLine="105"/>
       </Position18>
       <Position19>
         <Filename Value="NWbubbleList.pas"/>
-        <Caret Line="27" Column="16" TopLine="1"/>
+        <Caret Line="176" Column="43" TopLine="138"/>
       </Position19>
       <Position20>
         <Filename Value="NWbubbleList.pas"/>
-        <Caret Line="104" Column="28" TopLine="84"/>
+        <Caret Line="2" Column="26" TopLine="1"/>
       </Position20>
       <Position21>
         <Filename Value="NWbubbleList.pas"/>
-        <Caret Line="105" Column="90" TopLine="84"/>
+        <Caret Line="17" Column="26" TopLine="1"/>
       </Position21>
       <Position22>
-        <Filename Value="test1.lpr"/>
-        <Caret Line="111" Column="123" TopLine="105"/>
+        <Filename Value="NWbubbleList.pas"/>
+        <Caret Line="167" Column="26" TopLine="151"/>
       </Position22>
       <Position23>
-        <Filename Value="NWbubbleList.pas"/>
-        <Caret Line="176" Column="43" TopLine="138"/>
+        <Filename Value="test1.lpr"/>
+        <Caret Line="54" Column="88" TopLine="35"/>
       </Position23>
       <Position24>
-        <Filename Value="NWbubbleList.pas"/>
-        <Caret Line="2" Column="26" TopLine="1"/>
+        <Filename Value="test1.lpr"/>
+        <Caret Line="143" Column="5" TopLine="127"/>
       </Position24>
       <Position25>
-        <Filename Value="NWbubbleList.pas"/>
-        <Caret Line="17" Column="26" TopLine="1"/>
+        <Filename Value="test1.lpr"/>
+        <Caret Line="185" Column="19" TopLine="175"/>
       </Position25>
       <Position26>
         <Filename Value="NWbubbleList.pas"/>
-        <Caret Line="167" Column="26" TopLine="151"/>
+        <Caret Line="148" Column="33" TopLine="122"/>
       </Position26>
       <Position27>
-        <Filename Value="test1.lpr"/>
-        <Caret Line="54" Column="88" TopLine="35"/>
+        <Filename Value="NWbubbleList.pas"/>
+        <Caret Line="146" Column="35" TopLine="129"/>
       </Position27>
       <Position28>
-        <Filename Value="test1.lpr"/>
-        <Caret Line="143" Column="5" TopLine="127"/>
+        <Filename Value="NWbubbleList.pas"/>
+        <Caret Line="173" Column="31" TopLine="155"/>
       </Position28>
       <Position29>
-        <Filename Value="test1.lpr"/>
-        <Caret Line="23" Column="41" TopLine="180"/>
+        <Filename Value="NWbubbleList.pas"/>
+        <Caret Line="180" Column="18" TopLine="150"/>
       </Position29>
       <Position30>
-        <Filename Value="test1.lpr"/>
-        <Caret Line="185" Column="19" TopLine="175"/>
+        <Filename Value="NWbubbleList.pas"/>
+        <Caret Line="146" Column="34" TopLine="118"/>
       </Position30>
     </JumpHistory>
   </ProjectSession>

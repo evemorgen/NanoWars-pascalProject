@@ -157,7 +157,7 @@ begin
                     begin
                     if klik <> 0 then
                        begin
-                       pushFRONTbubble(bubbleList,klik,i);
+                       if klik <> i then pushFRONTbubble(bubbleList,klik,i);
                        klik := 0;
                        break;
                        end;
@@ -181,13 +181,16 @@ begin
            al_line(buffer,komorkiNaPlanszy[klik].posX+30-1,komorkiNaPlanszy[klik].posY+30-1,al_mouse_x-1,al_mouse_y-1,al_makecol(1,41,213));
            al_line(buffer,komorkiNaPlanszy[klik].posX+30+1,komorkiNaPlanszy[klik].posY+30+1,al_mouse_x+1,al_mouse_y+1,al_makecol(1,41,213));
            end;
-        {drawBubble(bubbleList);
-        checkBubble(bubbleList);
-        if (bubbleList <> nil) and ((zlicz mod 10) = 0) then
+        if (bubbleList <> nil) then
+           begin
+           drawBubble(bubbleList);
+           end;
+        if (bubbleList <> nil) and ((zlicz mod 16) = 0) then
         begin
+             checkBubble(bubbleList);
              updateBubble(bubbleList);
         end;
-        }
+
         al_blit(buffer,al_screen,0,0,0,0,al_SCREEN_W,al_SCREEN_H);
         zlicz := (zlicz+1) mod 16;
         al_rest(1);
