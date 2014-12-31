@@ -159,7 +159,11 @@ begin
      pomoc := listeczka;
      while pomoc <> nil do
            begin
-           al_circlefill(buffer,pomoc^.posX,pomoc^.posY,10,al_makecol(255,255,255));
+           if komorkiNaPlanszy[pomoc^.fromNr].ID <> 1 then al_circlefill(buffer,pomoc^.posX,pomoc^.posY,10,al_makecol(166,5,5))
+                                                      else al_circlefill(buffer,pomoc^.posX,pomoc^.posY,10,al_makecol(66,185,253));
+           al_circle(buffer,pomoc^.posX,pomoc^.posY,11,al_makecol(255,255,255));
+           al_circle(buffer,pomoc^.posX,pomoc^.posY,12,al_makecol(255,255,255));
+           al_textout_centre_ex (buffer, al_font,intToStr(pomoc^.punkty), pomoc^.posX+1,pomoc^.posY-1, al_makecol (0, 0, 0), -1);
            pomoc := pomoc^.nastepny;
            end;
 end;
