@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Compiler Value="C:\lazarus\fpc\2.6.4\bin\i386-win32\fpc.exe" Date="1154380081"/>
+  <Params Value=" -MObjFPC -Scghi -O1 -g -gl -vewnhi -FiC:\Users\eVwindows\Dropbox\AllegroPasProject\lib\i386-win32 -FuC:\Users\eVwindows\Dropbox\AllegroPasProject\ -FUC:\Users\eVwindows\Dropbox\AllegroPasProject\lib\i386-win32\ -l test1.lpr"/>
+</CONFIG>
