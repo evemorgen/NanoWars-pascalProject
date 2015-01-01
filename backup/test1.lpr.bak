@@ -33,6 +33,15 @@ var flaga                      :integer;
 {$I NWcells.pas}
 
 
+function whoIsThisCell():integer;
+var i        : integer;
+begin
+     for i:=1 to ilosc do
+           begin
+           if (komorkiNaPlanszy[i].posX <= al_mouse_x) and (komorkiNaPlanszy[i].posX + 60 >= al_mouse_x) and (komorkiNaPlanszy[i].posY <= al_mouse_y) and (komorkiNaPlanszy[i].posY + 60 >= al_mouse_y) then
+           end;
+end;
+
 procedure loadSprites;
 var tmpString : string;
 begin
@@ -70,7 +79,7 @@ begin
 
 
   for i:= 1 to ilosc do initCell(i,random(al_SCREEN_W-110)+55,random(al_SCREEN_H-110)+55,random(20)+10,1,random(2),20,random(16)+1); //ktoraKomorka, X,Y,points,size,id,promien
-  while al_key[AL_KEY_ESC] = 0 do
+  while (al_key[AL_KEY_ESC] = 0) and (ifEnd() = 0) do
         begin
         al_clear_bitmap(buffer);
         for i:=1 to ilosc do drawCell(i,zlicz);
@@ -91,7 +100,7 @@ begin
                  end;
            for i:=1 to ilosc do
                  begin
-                 if (komorkiNaPlanszy[i].posX <= al_mouse_x) and (komorkiNaPlanszy[i].posX + 60 >= al_mouse_x) and (komorkiNaPlanszy[i].posY <= al_mouse_y) and (komorkiNaPlanszy[i].posY + 60 >= al_mouse_y) then
+                 if (komorkiNaPlanszy[i].posX <= al_mouse_x) and (komorkiNaPlanszy[i].posX + 60 >= al_mouse_x) and (komorkiNaPlanszy[i].posY <= al_mouse_y) and (komorkiNaPlanszy[i].posY + 60 >= al_mouse_y) and (komorkiNaPlanszy[i].ID = 0) then
                     begin
                     klik := i;
                     break;
@@ -111,15 +120,15 @@ begin
            begin
            drawBubble(bubbleList);
            end;
-        if (bubbleList <> nil) and ((zlicz mod 16) = 0) then
+        checkBubble(bubbleList);
+        if (bubbleList <> nil) and ((zlicz mod 5) = 0) then  //wrazliwe na predkosc lecenia babelkow
         begin
-             checkBubble(bubbleList);
-             updateBubble(bubbleList);
+             updateBubble(bubbleList,zlicz);
         end;
         updateCells(zlicz);
 
         al_blit(buffer,al_screen,0,0,0,0,al_SCREEN_W,al_SCREEN_H);
-        zlicz := (zlicz+1) mod 16;
+        zlicz := (zlicz+1) mod 100000;
         al_rest(1);
         end;
   al_destroy_bitmap(buffer);

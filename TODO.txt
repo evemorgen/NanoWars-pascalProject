@@ -1,0 +1,4 @@
+1. dostosowanie prêdkoœci b¹belków. 
+2. dodawanie sprawdzania prêdkoœci po wyborze rozdzielczosci
+3. AI przeciwnika
+4. dokoñczyæ menu.
