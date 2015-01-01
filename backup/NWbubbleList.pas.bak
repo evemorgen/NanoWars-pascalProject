@@ -170,7 +170,6 @@ begin
               end;
            al_circle(buffer,pomoc^.posX,pomoc^.posY,11,al_makecol(255,255,255));
            al_circle(buffer,pomoc^.posX,pomoc^.posY,12,al_makecol(255,255,255));
-           //al_textout_centre_ex (buffer, al_font,intToStr(pomoc^.punkty), pomoc^.posX+2,pomoc^.posY-1, al_makecol (0, 0, 0), -1);
            pomoc := pomoc^.nastepny;
            end;
 end;

@@ -1,3 +1,16 @@
+type
+komorka = record
+posX      : integer;  //pozycja w x
+posY      : integer;  //pozycja w y
+punkty    : integer;
+rozmiar   : integer;
+promien   : integer;
+ID        : integer;      //wielkosć komórki, rozróżniamy 3 wielkosci, im większa komorka tym szybciej produkuje points'y
+spriteNr  : integer; //obrazek reprezentujący komórkę
+end;
+
+var komorkiNaPlanszy : array of komorka; //tablica dynamiczna o zmiennej dlugosci trzymająca wszystkie komórki występujące na planszy
+
 procedure initCell(ktoraKomorka, X,Y,points,size,id,promien,spriteNr : integer);
 var i:integer;
 begin
@@ -10,7 +23,7 @@ begin
      komorkiNaPlanszy[ktoraKomorka].ID := id;
 end;
 
-procedure drawCell(ktoraKomorka,zlicz: integer);
+procedure drawCell(ktoraKomorka,dt: integer);
 begin
      if komorkiNaPlanszy[ktoraKomorka].ID = 1 then
         begin
@@ -20,7 +33,7 @@ begin
         begin
         al_draw_sprite(buffer,spriteRED[komorkiNaPlanszy[ktoraKomorka].spriteNr],komorkiNaPlanszy[ktoraKomorka].posX,komorkiNaPlanszy[ktoraKomorka].posY);
        end;
-     if (zlicz mod 15) = 0 then komorkiNaPlanszy[ktoraKomorka].spriteNr := ((komorkiNaPlanszy[ktoraKomorka].spriteNr + 1) mod 16) + 1; //wrazliwe animacje komorek
+     if (dt mod configTAB[3]) = 0 then komorkiNaPlanszy[ktoraKomorka].spriteNr := ((komorkiNaPlanszy[ktoraKomorka].spriteNr + 1) mod 16) +1; //wrazliwe animacje komorek
      al_textout_centre_ex (buffer, al_font, intToStr(komorkiNaPlanszy[ktoraKomorka].punkty),komorkiNaPlanszy[ktoraKomorka].posX + 30,komorkiNaPlanszy[ktoraKomorka].posY + 30, al_makecol (255, 255, 255), -1);
 end;
 

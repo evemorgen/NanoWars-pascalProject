@@ -32,7 +32,6 @@ var del      : integer;
     zlicz    : integer;
     bufforek : al_BITMAPptr;
 begin
-     loadSprites;
      del := 30;
      zlicz := 0;
      bufforek := al_create_bitmap(al_SCREEN_W,al_SCREEN_H);
