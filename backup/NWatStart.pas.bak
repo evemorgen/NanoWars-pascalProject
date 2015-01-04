@@ -16,7 +16,7 @@ var i            : integer;
 begin
      assign(cfg,'config.cfg');
      reset(cfg);
-     SetLength(configTAB,3); //ilosc linijek w cfg
+     SetLength(configTAB,4); //ilosc linijek w cfg
      i := 1;
      while eof(cfg) = false do
            begin
@@ -27,11 +27,12 @@ begin
      close(cfg);
 end;
 
-function pickDelay():integer;
+function pickDelay1():integer;
 var del      : integer;
     zlicz    : integer;
     bufforek : al_BITMAPptr;
 begin
+     loadSprites;
      del := 30;
      zlicz := 0;
      bufforek := al_create_bitmap(al_SCREEN_W,al_SCREEN_H);
@@ -39,7 +40,7 @@ begin
      while al_key[AL_KEY_ENTER] = 0 do
         begin
         al_clear_bitmap(bufforek);
-        al_textout_centre_ex (bufforek, al_font,'Dostosuj predkosc animacji.', al_SCREEN_W DIV 2, (al_SCREEN_H DIV 2), al_makecol (255, 255, 255), -1);
+        al_textout_centre_ex (bufforek, al_font,'Dostosuj predkosc animacji. #1', al_SCREEN_W DIV 2, (al_SCREEN_H DIV 2), al_makecol (255, 255, 255), -1);
         al_textout_centre_ex (bufforek, al_font,'<- LEFT ARROW - zmniejsza predkosc animacji', al_SCREEN_W DIV 2, (al_SCREEN_H DIV 2) + 20, al_makecol (255, 255, 255), -1);
         al_textout_centre_ex (bufforek, al_font,'-> RIGHT ARROW - zwieksza predkosc animacji', al_SCREEN_W DIV 2, (al_SCREEN_H DIV 2) + 40, al_makecol (255, 255, 255), -1);
         al_textout_centre_ex (bufforek, al_font,'Wcisnij Enter aby kontynuowac', al_SCREEN_W DIV 2, (al_SCREEN_H DIV 2) + 60, al_makecol (255, 255, 255), -1);
@@ -55,8 +56,57 @@ begin
         zlicz := (zlicz + 1) mod 10000;
         al_rest(1);
         end;
-     pickDelay := del;
+     pickDelay1 := del;
+end;
 
+function pickDelay2():integer;
+var del        : integer;
+    zlicz      : integer;
+    bufforek   : al_BITMAPptr;
+    pomoc      : pOnBubble;
+begin
+    al_rest(100);
+    del := 30;
+    zlicz := 0;
+    bufforek := al_create_bitmap(al_SCREEN_W,al_SCREEN_H);
+    initCell(1,-60 ,al_SCREEN_H div 2 + 120,random(20)+10,1,random(2),20,random(16)+1);
+    initCell(2,al_SCREEN_W,al_SCREEN_H div 2 + 120,random(20)+10,1,random(2),20,random(16)+1);
+    while al_KEY[al_KEY_ENTER] = 0 do
+       begin
+       al_clear_bitmap(bufforek);
+       al_textout_centre_ex (bufforek, al_font,'Dostosuj predkosc animacji. #2', al_SCREEN_W DIV 2, (al_SCREEN_H DIV 2), al_makecol (255, 255, 255), -1);
+       al_textout_centre_ex (bufforek, al_font,'<- LEFT ARROW - zmniejsza predkosc animacji', al_SCREEN_W DIV 2, (al_SCREEN_H DIV 2) + 20, al_makecol (255, 255, 255), -1);
+       al_textout_centre_ex (bufforek, al_font,'-> RIGHT ARROW - zwieksza predkosc animacji', al_SCREEN_W DIV 2, (al_SCREEN_H DIV 2) + 40, al_makecol (255, 255, 255), -1);
+       al_textout_centre_ex (bufforek, al_font,'Wcisnij Enter aby kontynuowac', al_SCREEN_W DIV 2, (al_SCREEN_H DIV 2) + 60, al_makecol (255, 255, 255), -1);
+       al_textout_centre_ex (bufforek, al_font,intToStr(del),al_SCREEN_W DIV 2, (al_SCREEN_H DIV 2) + 80, al_makecol(255,255,255),-1);
+       if (zlicz mod 300) = 0 then pushFRONTbubble(bubbleList,1,2);
+       if (bubbleList <> nil) then
+          begin
+          pomoc := bubbleList;
+          while pomoc <> nil do
+                begin
+                al_circlefill(bufforek,pomoc^.posX,pomoc^.posY,10,al_makecol(166,5,5));
+                al_textout_centre_ex (bufforek, al_font,intToStr(pomoc^.punkty), pomoc^.posX+1,pomoc^.posY-2, al_makecol (255, 255, 255), -1);
+                al_circle(bufforek,pomoc^.posX,pomoc^.posY,11,al_makecol(255,255,255));
+                al_circle(bufforek,pomoc^.posX,pomoc^.posY,12,al_makecol(255,255,255));
+                pomoc := pomoc^.nastepny;
+                end;
+          end;
+       checkBubble(bubbleList);
+       if (bubbleList <> nil) and ((zlicz mod del) = 0) then  //wrazliwe na predkosc lecenia babelkow
+       begin
+            updateBubble(bubbleList,zlicz);
+       end;
+
+        al_blit(bufforek,al_screen,0,0,0,0,al_SCREEN_W,al_SCREEN_H);
+        if al_key[AL_KEY_LEFT] <> 0 then begin del := del + 1; al_rest(50); end;
+        if al_key[AL_KEY_RIGHT] <> 0 then begin del := del - 1; al_rest(50); end;
+        if del <= 0 then del := 1;
+        zlicz := (zlicz + 1) mod 10000;
+        al_rest(1);
+       end;
+       bubbleList := nil;
+    pickDelay2 := del;
 end;
 
 procedure pickRes;
@@ -105,7 +155,8 @@ begin
         rewrite(cfg);
         writeln(cfg,intToStr(width[circlePoz]));
         writeln(cfg,intToStr(height[circlePoz]));
-        writeln(cfg,intToStr(pickDelay()));
+        writeln(cfg,intToStr(pickDelay1()));
+        writeln(cfg,intToStr(pickDelay2()));
         close(cfg);
         if width[circlePoz] > 1024 then wspolczynnikRozdzielczosci := 0
         else                            wspolczynnikRozdzielczosci := 1;

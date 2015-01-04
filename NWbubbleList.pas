@@ -145,7 +145,11 @@ begin
         begin
         if komorkiNaPlanszy[pomoc^.fromNr].ID <> komorkiNaPlanszy[pomoc^.toNr].ID then komorkiNaPlanszy[pomoc^.toNr].punkty := komorkiNaPlanszy[pomoc^.toNr].punkty - pomoc^.punkty
                                                                                   else komorkiNaPlanszy[pomoc^.toNr].punkty := komorkiNaPlanszy[pomoc^.toNr].punkty + pomoc^.punkty;
-        if komorkiNaPlanszy[pomoc^.toNr].punkty < 0 then begin komorkiNaPlanszy[pomoc^.toNr].ID := 1-komorkiNaPlanszy[pomoc^.toNr].ID; komorkiNaPlanszy[pomoc^.toNr].punkty := (-1)*(komorkiNaPlanszy[pomoc^.toNr].punkty); end;
+        if komorkiNaPlanszy[pomoc^.toNr].punkty < 0 then
+           begin
+              komorkiNaPlanszy[pomoc^.toNr].ID := komorkiNaPlanszy[pomoc^.FromNr].ID;
+              komorkiNaPlanszy[pomoc^.toNr].punkty := (-1)*(komorkiNaPlanszy[pomoc^.toNr].punkty);
+           end;
         popBubble(listeczka,z);
         end;
      until z=0;

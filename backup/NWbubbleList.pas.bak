@@ -46,7 +46,6 @@ begin
      dodawany^.destY  := komorkiNaPlanszy[doo].posY+30;
      dodawany^.distance := round(sqrt(sqr(dodawany^.posX - dodawany^.destX) + sqr(dodawany^.posY - dodawany^.destY)));
      dodawany^.interval := dodawany^.distance div (abs(dodawany^.posX - dodawany^.destX));
-     writeln('distance: ',dodawany^.distance,' | interval:',dodawany^.interval);
      if dodawany^.destX > dodawany^.posX then dodawany^.incDecX := 1
                                          else dodawany^.incDecX := -1;
      dodawany^.nastepny := poprzedni;
