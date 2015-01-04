@@ -26,25 +26,54 @@ var zOnoFF                     : integer;
 {$I NWatStart.pas}
 {$I NWmenu.pas}
 
+
+function doSpacji(var tekst:string):string;
+var i : integer;
+var tmpString : string;
 begin
-  initAll();
+  i := 1;
+  tmpString := tekst;
+  while(tekst[i] <> ' ') and (i <= length(tekst)) do i:=i+1;
+  tmpString := copy(tekst,1,i-1);
+  tekst := copy(tekst,i+1,length(tekst));
+  doSpacji := tmpString;
+end;
 
-  Setlength(komorkiNaPlanszy,256);                    //brzydkie rozwiązanie ale dziala :D
 
-  pickRes();
-  //menu();
-  ilosc := 10;
+
+procedure loadLevel(levelFile:string);
+var level     : text;
+    tmpString : string;
+    i         : integer;
+    X,Y,P,S,ID: integer;
+begin
+     i := 1;
+     tmpString := 'lvl/'+levelFile;
+     writeln(tmpString);
+     assign(level,tmpString);
+     reset(level);
+
+     while eof(level) = false do
+           begin
+           readln(level,tmpString);
+           X  := strToInt(doSpacji(tmpString));
+           Y  := strToInt(doSpacji(tmpString));
+           P  := strToInt(doSpacji(tmpString));
+           S  := strToInt(doSpacji(tmpString));
+           ID := strToInt(doSpacji(tmpString));
+           initCell(i,X,Y,P,S,ID,random(16)+1);
+           i := i+1;
+           end;
+     ilosc := i-1;
+     close(level);
+end;
+
+
+procedure playLevel;
+var i,j   : integer;
+var klik  : integer;
+begin
   klik := 0;
-  zlicz := 0;
-  bubbleCount := 0;
-  zOnOFF := 0;
-  loadSprites;
-
-  buffer := al_create_bitmap(al_SCREEN_W,al_SCREEN_H);
-  al_clear_bitmap(buffer);
-
-  for i:= 1 to 7 do initCell(i,random(al_SCREEN_W-110)+55,random(al_SCREEN_H-110)+55,random(20)+10,1,random(3),20,random(16)+1); //ktoraKomorka, X,Y,points,size,id,promien
-  for i:= 8 to 10 do initCell(i,random(al_SCREEN_W-110)+55,random(al_SCREEN_H-110)+55,random(20)+10,3,random(3),20,random(16)+1); //ktoraKomorka, X,Y,points,size,id,promien
   while (al_key[AL_KEY_ESC] = 0) and (ifEnd() = 0) do
         begin
         al_clear_bitmap(buffer);
@@ -178,6 +207,38 @@ begin
         zlicz := (zlicz+1) mod 100000;
         al_rest(1);
         end;
+  bubbleList := nil;
+end;
+
+
+
+var cos : string;
+
+begin
+  initAll();
+
+  Setlength(komorkiNaPlanszy,256);                    //brzydkie rozwiązanie ale dziala :D
+
+  pickRes();
+  //menu();
+  ilosc := 10;
+  klik := 0;
+  zlicz := 0;
+  bubbleCount := 0;
+  zOnOFF := 0;
+  loadSprites;
+
+  buffer := al_create_bitmap(al_SCREEN_W,al_SCREEN_H);
+  al_clear_bitmap(buffer);
+
+  //for i:= 1 to 7 do initCell(i,random(al_SCREEN_W-110)+55,random(al_SCREEN_H-110)+55,random(20)+10,1,random(3),random(16)+1); //ktoraKomorka, X,Y,points,size,id,promien
+  //for i:= 8 to 10 do initCell(i,random(al_SCREEN_W-110)+55,random(al_SCREEN_H-110)+55,random(20)+10,3,random(3),random(16)+1); //ktoraKomorka, X,Y,points,size,id,promien
+  loadLevel('1.lvl');
+  playLevel();
+
+  loadLevel('2.lvl');
+  playLevel();
+
   al_destroy_bitmap(buffer);
   destroySprites;
   al_exit;

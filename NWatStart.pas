@@ -36,7 +36,7 @@ begin
      del := 30;
      zlicz := 0;
      bufforek := al_create_bitmap(al_SCREEN_W,al_SCREEN_H);
-     initCell(1,al_SCREEN_W div 2-30 ,al_SCREEN_H div 2 + 120,random(20)+10,1,random(2),20,random(16)+1);
+     initCell(1,al_SCREEN_W div 2-30 ,al_SCREEN_H div 2 + 120,random(20)+10,1,random(2),random(16)+1);
      while al_key[AL_KEY_ENTER] = 0 do
         begin
         al_clear_bitmap(bufforek);
@@ -69,8 +69,8 @@ begin
     del := 30;
     zlicz := 0;
     bufforek := al_create_bitmap(al_SCREEN_W,al_SCREEN_H);
-    initCell(1,-60 ,al_SCREEN_H div 2 + 120,random(20)+10,1,random(2),20,random(16)+1);
-    initCell(2,al_SCREEN_W,al_SCREEN_H div 2 + 120,random(20)+10,1,random(2),20,random(16)+1);
+    initCell(1,-60 ,al_SCREEN_H div 2 + 120,random(20)+10,1,random(2),random(16)+1);
+    initCell(2,al_SCREEN_W,al_SCREEN_H div 2 + 120,random(20)+10,1,random(2),random(16)+1);
     while al_KEY[al_KEY_ENTER] = 0 do
        begin
        al_clear_bitmap(bufforek);

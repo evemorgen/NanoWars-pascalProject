@@ -42,7 +42,7 @@ begin
      if (dt mod configTAB[3]) = 0 then komorkiNaPlanszy[ktoraKomorka].spriteNr := ((komorkiNaPlanszy[ktoraKomorka].spriteNr + 1) mod 16) +1; //wrazliwe animacje komorek
      if komorkiNaPlanszy[ktoraKomorka].ID <> 2 then
         if komorkiNaPlanszy[ktoraKomorka].rozmiar < 3 then al_textout_centre_ex (buffer, al_font, intToStr(komorkiNaPlanszy[ktoraKomorka].punkty),komorkiNaPlanszy[ktoraKomorka].posX + 30,komorkiNaPlanszy[ktoraKomorka].posY + 30, al_makecol (255, 255, 255), -1)
-                                                      else al_textout_centre_ex (buffer, al_font, intToStr(komorkiNaPlanszy[ktoraKomorka].punkty),komorkiNaPlanszy[ktoraKomorka].posX + 45,komorkiNaPlanszy[ktoraKomorka].posY + 45, al_makecol (255, 255, 255), -1);
+                                                      else al_textout_centre_ex (buffer, al_font, intToStr(komorkiNaPlanszy[ktoraKomorka].punkty),komorkiNaPlanszy[ktoraKomorka].posX + 45,komorkiNaPlanszy[ktoraKomorka].posY + 45, al_makecol (255, 255, 255), -1)
      else
         if komorkiNaPlanszy[ktoraKomorka].rozmiar < 3 then al_textout_centre_ex (buffer, al_font, intToStr(komorkiNaPlanszy[ktoraKomorka].punkty),komorkiNaPlanszy[ktoraKomorka].posX + 30,komorkiNaPlanszy[ktoraKomorka].posY + 30, al_makecol (0, 0, 0), -1)
                                                       else al_textout_centre_ex (buffer, al_font, intToStr(komorkiNaPlanszy[ktoraKomorka].punkty),komorkiNaPlanszy[ktoraKomorka].posX + 45,komorkiNaPlanszy[ktoraKomorka].posY + 45, al_makecol (0, 0, 0), -1);
