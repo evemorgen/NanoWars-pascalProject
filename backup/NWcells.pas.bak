@@ -2,11 +2,12 @@ type
 komorka = record
 posX      : integer;  //pozycja w x
 posY      : integer;  //pozycja w y
-punkty    : integer;
-rozmiar   : integer;
-promien   : integer;
-ID        : integer;      //wielkosć komórki, rozróżniamy 3 wielkosci, im większa komorka tym szybciej produkuje points'y
-spriteNr  : integer; //obrazek reprezentujący komórkę
+punkty    : integer;  //ilosc punktow ktorymi komorka moze strzelac
+rozmiar   : integer;  //wielkosć komórki, rozróżniamy 3 wielkosci, im większa komorka tym szybciej produkuje points'y
+promien   : integer;  //do kasacji
+ID        : integer;  //numerek okreslajacy do kogo nalezy komorka - 0 gracz,1 AI, 2 neutralna;
+spriteNr  : integer;  //numer obrazka do wyswietlenia
+rmbc      : integer;  //flaga okreslajaca czy prawy przycisk myszy byl klikniety na komorce
 end;
 
 var komorkiNaPlanszy : array of komorka; //tablica dynamiczna o zmiennej dlugosci trzymająca wszystkie komórki występujące na planszy
@@ -21,30 +22,30 @@ begin
      komorkiNaPlanszy[ktoraKomorka].rozmiar := size;
      komorkiNaPlanszy[ktoraKomorka].promien := promien;
      komorkiNaPlanszy[ktoraKomorka].ID := id;
+     komorkiNaPlanszy[ktoraKomorka].rmbc := 0;
 end;
 
 procedure drawCell(ktoraKomorka,dt: integer);
 begin
      if komorkiNaPlanszy[ktoraKomorka].ID = 1 then
-        begin
         al_draw_sprite(buffer,spriteBLUE[komorkiNaPlanszy[ktoraKomorka].spriteNr],komorkiNaPlanszy[ktoraKomorka].posX,komorkiNaPlanszy[ktoraKomorka].posY);
-        end
-     else
-        begin
+     if komorkiNaPlanszy[ktoraKomorka].ID = 0 then
         al_draw_sprite(buffer,spriteRED[komorkiNaPlanszy[ktoraKomorka].spriteNr],komorkiNaPlanszy[ktoraKomorka].posX,komorkiNaPlanszy[ktoraKomorka].posY);
-       end;
-     if (dt mod 15) = 0 then komorkiNaPlanszy[ktoraKomorka].spriteNr := ((komorkiNaPlanszy[ktoraKomorka].spriteNr + 1) mod 16) +1; //wrazliwe animacje komorek
+     if komorkiNaPlanszy[ktoraKomorka].ID = 2 then
+        al_draw_sprite(buffer,spriteWHITE[komorkiNaPlanszy[ktoraKomorka].spriteNr],komorkiNaPlanszy[ktoraKomorka].posX,komorkiNaPlanszy[ktoraKomorka].posY);
+
+     if (dt mod configTAB[3]) = 0 then komorkiNaPlanszy[ktoraKomorka].spriteNr := ((komorkiNaPlanszy[ktoraKomorka].spriteNr + 1) mod 16) +1; //wrazliwe animacje komorek
      al_textout_centre_ex (buffer, al_font, intToStr(komorkiNaPlanszy[ktoraKomorka].punkty),komorkiNaPlanszy[ktoraKomorka].posX + 30,komorkiNaPlanszy[ktoraKomorka].posY + 30, al_makecol (255, 255, 255), -1);
 end;
 
 procedure updateCells(dt : integer);
 var i : integer;
 begin
-     if (dt mod 300) = 0 then //wrazliwe zwiekszanie szybkosci rosniecia babelkow
+     if (dt mod (configTAB[4]*100)) = 0 then //wrazliwe zwiekszanie szybkosci rosniecia babelkow
         begin
         for i:= 1 to ilosc do
-            begin
-            komorkiNaPlanszy[i].punkty := komorkiNaPlanszy[i].punkty + komorkiNaPlanszy[i].rozmiar;
+            begin //neutralne komorki nie rosna.
+            if komorkiNaPlanszy[i].ID <> 2 then komorkiNaPlanszy[i].punkty := komorkiNaPlanszy[i].punkty + komorkiNaPlanszy[i].rozmiar;
             end;
         end
 end;

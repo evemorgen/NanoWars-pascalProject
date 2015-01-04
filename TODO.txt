@@ -1,4 +1,5 @@
-1. dostosowanie prêdkoœci b¹belków. 
-2. dodawanie sprawdzania prêdkoœci po wyborze rozdzielczosci
-3. AI przeciwnika
-4. dokoñczyæ menu.
+1. AI przeciwnika
+2. dokoñczyæ menu.
+3. dodaæ drug¹ wielkoœæ jednostek
+4. zrobiæ edytor lvl'i
+5. zaczytywaæ lvl'e z plików tekstowych
