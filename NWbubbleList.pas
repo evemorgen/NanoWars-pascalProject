@@ -41,9 +41,22 @@ begin
      if komorkiNaPlanszy[odd].punkty mod 2 <> 0 then komorkiNaPlanszy[odd].punkty := (komorkiNaPlanszy[odd].punkty div 2)+1
                                                 else komorkiNaPlanszy[odd].punkty := (komorkiNaPlanszy[odd].punkty div 2);
      dodawany^.posX   := komorkiNaPlanszy[odd].posX+30;
-     dodawany^.posY   := komorkiNaPlanszy[odd].posY+30;
-     dodawany^.destX  := komorkiNaPlanszy[doo].posX+30;
-     dodawany^.destY  := komorkiNaPlanszy[doo].posY+30;
+     {
+     if komorkiNaPlanszy[doo].rozmiar < 3 then
+        begin}
+        dodawany^.posX   := komorkiNaPlanszy[odd].posX+30;
+        dodawany^.posY   := komorkiNaPlanszy[odd].posY+30;
+        dodawany^.destX  := komorkiNaPlanszy[doo].posX+30;
+        dodawany^.destY  := komorkiNaPlanszy[doo].posY+30;
+     {   end
+     else
+        begin
+        dodawany^.posX   := komorkiNaPlanszy[odd].posX+45;
+        dodawany^.posY   := komorkiNaPlanszy[odd].posY+45;
+        dodawany^.destX := komorkiNaPlanszy[doo].posX+45;
+        dodawany^.destY  := komorkiNaPlanszy[doo].posY+45;
+        end;
+     }
      dodawany^.distance := round(sqrt(sqr(dodawany^.posX - dodawany^.destX) + sqr(dodawany^.posY - dodawany^.destY)));
      dodawany^.interval := dodawany^.distance div (abs(dodawany^.posX - dodawany^.destX));
      if dodawany^.destX > dodawany^.posX then dodawany^.incDecX := 1

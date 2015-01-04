@@ -43,7 +43,8 @@ begin
   buffer := al_create_bitmap(al_SCREEN_W,al_SCREEN_H);
   al_clear_bitmap(buffer);
 
-  for i:= 1 to ilosc do initCell(i,random(al_SCREEN_W-110)+55,random(al_SCREEN_H-110)+55,random(20)+10,1,random(3),20,random(16)+1); //ktoraKomorka, X,Y,points,size,id,promien
+  for i:= 1 to 7 do initCell(i,random(al_SCREEN_W-110)+55,random(al_SCREEN_H-110)+55,random(20)+10,1,random(3),20,random(16)+1); //ktoraKomorka, X,Y,points,size,id,promien
+  for i:= 8 to 10 do initCell(i,random(al_SCREEN_W-110)+55,random(al_SCREEN_H-110)+55,random(20)+10,3,random(3),20,random(16)+1); //ktoraKomorka, X,Y,points,size,id,promien
   while (al_key[AL_KEY_ESC] = 0) and (ifEnd() = 0) do
         begin
         al_clear_bitmap(buffer);
@@ -82,9 +83,18 @@ begin
                  begin
                  if komorkiNaPlanszy[i].ID = 0 then
                     begin
-                    al_line(buffer,komorkiNaPlanszy[i].posX+30,komorkiNaPlanszy[i].posY+30,al_mouse_x,al_mouse_y,al_makecol(1,41,213));
-                    al_line(buffer,komorkiNaPlanszy[i].posX+30-1,komorkiNaPlanszy[i].posY+30-1,al_mouse_x-1,al_mouse_y-1,al_makecol(1,41,213));
-                    al_line(buffer,komorkiNaPlanszy[i].posX+30+1,komorkiNaPlanszy[i].posY+30+1,al_mouse_x+1,al_mouse_y+1,al_makecol(1,41,213));
+                    if komorkiNaPlanszy[i].rozmiar < 3 then
+                       begin
+                       al_line(buffer,komorkiNaPlanszy[i].posX+30,komorkiNaPlanszy[i].posY+30,al_mouse_x,al_mouse_y,al_makecol(1,41,213));
+                       al_line(buffer,komorkiNaPlanszy[i].posX+30-1,komorkiNaPlanszy[i].posY+30-1,al_mouse_x-1,al_mouse_y-1,al_makecol(1,41,213));
+                       al_line(buffer,komorkiNaPlanszy[i].posX+30+1,komorkiNaPlanszy[i].posY+30+1,al_mouse_x+1,al_mouse_y+1,al_makecol(1,41,213));
+                       end
+                    else
+                       begin
+                       al_line(buffer,komorkiNaPlanszy[i].posX+45,komorkiNaPlanszy[i].posY+45,al_mouse_x,al_mouse_y,al_makecol(1,41,213));
+                       al_line(buffer,komorkiNaPlanszy[i].posX+45-1,komorkiNaPlanszy[i].posY+45-1,al_mouse_x-1,al_mouse_y-1,al_makecol(1,41,213));
+                       al_line(buffer,komorkiNaPlanszy[i].posX+45+1,komorkiNaPlanszy[i].posY+45+1,al_mouse_x+1,al_mouse_y+1,al_makecol(1,41,213));
+                       end;
                     end;
                  end;
            if (al_mouse_b AND 1) <> 0 then
@@ -105,9 +115,18 @@ begin
                  begin
                  if (komorkiNaPlanszy[i].ID = 0) and (komorkiNaPlanszy[i].rmbc <> 0) then
                     begin
-                    al_line(buffer,komorkiNaPlanszy[i].posX+30,komorkiNaPlanszy[i].posY+30,al_mouse_x,al_mouse_y,al_makecol(1,41,213));
-                    al_line(buffer,komorkiNaPlanszy[i].posX+30-1,komorkiNaPlanszy[i].posY+30-1,al_mouse_x-1,al_mouse_y-1,al_makecol(1,41,213));
-                    al_line(buffer,komorkiNaPlanszy[i].posX+30+1,komorkiNaPlanszy[i].posY+30+1,al_mouse_x+1,al_mouse_y+1,al_makecol(1,41,213));
+                    if komorkiNaPlanszy[i].rozmiar < 3 then
+                       begin
+                       al_line(buffer,komorkiNaPlanszy[i].posX+30,komorkiNaPlanszy[i].posY+30,al_mouse_x,al_mouse_y,al_makecol(1,41,213));
+                       al_line(buffer,komorkiNaPlanszy[i].posX+30-1,komorkiNaPlanszy[i].posY+30-1,al_mouse_x-1,al_mouse_y-1,al_makecol(1,41,213));
+                       al_line(buffer,komorkiNaPlanszy[i].posX+30+1,komorkiNaPlanszy[i].posY+30+1,al_mouse_x+1,al_mouse_y+1,al_makecol(1,41,213));
+                       end
+                    else
+                       begin
+                       al_line(buffer,komorkiNaPlanszy[i].posX+45,komorkiNaPlanszy[i].posY+45,al_mouse_x,al_mouse_y,al_makecol(1,41,213));
+                       al_line(buffer,komorkiNaPlanszy[i].posX+45-1,komorkiNaPlanszy[i].posY+45-1,al_mouse_x-1,al_mouse_y-1,al_makecol(1,41,213));
+                       al_line(buffer,komorkiNaPlanszy[i].posX+45+1,komorkiNaPlanszy[i].posY+45+1,al_mouse_x+1,al_mouse_y+1,al_makecol(1,41,213));
+                       end;
                     end;
                  end;
            if (al_mouse_b AND 2) <> 0 then
@@ -134,9 +153,18 @@ begin
 
         if klik <> 0 then
            begin
-           al_line(buffer,komorkiNaPlanszy[klik].posX+30,komorkiNaPlanszy[klik].posY+30,al_mouse_x,al_mouse_y,al_makecol(1,41,213));
-           al_line(buffer,komorkiNaPlanszy[klik].posX+30-1,komorkiNaPlanszy[klik].posY+30-1,al_mouse_x-1,al_mouse_y-1,al_makecol(1,41,213));
-           al_line(buffer,komorkiNaPlanszy[klik].posX+30+1,komorkiNaPlanszy[klik].posY+30+1,al_mouse_x+1,al_mouse_y+1,al_makecol(1,41,213));
+           if komorkiNaPlanszy[klik].rozmiar < 3 then
+                       begin
+                       al_line(buffer,komorkiNaPlanszy[klik].posX+30,komorkiNaPlanszy[klik].posY+30,al_mouse_x,al_mouse_y,al_makecol(1,41,213));
+                       al_line(buffer,komorkiNaPlanszy[klik].posX+30-1,komorkiNaPlanszy[klik].posY+30-1,al_mouse_x-1,al_mouse_y-1,al_makecol(1,41,213));
+                       al_line(buffer,komorkiNaPlanszy[klik].posX+30+1,komorkiNaPlanszy[klik].posY+30+1,al_mouse_x+1,al_mouse_y+1,al_makecol(1,41,213));
+                       end
+                    else
+                       begin
+                       al_line(buffer,komorkiNaPlanszy[klik].posX+45,komorkiNaPlanszy[klik].posY+45,al_mouse_x,al_mouse_y,al_makecol(1,41,213));
+                       al_line(buffer,komorkiNaPlanszy[klik].posX+45-1,komorkiNaPlanszy[klik].posY+45-1,al_mouse_x-1,al_mouse_y-1,al_makecol(1,41,213));
+                       al_line(buffer,komorkiNaPlanszy[klik].posX+45+1,komorkiNaPlanszy[klik].posY+45+1,al_mouse_x+1,al_mouse_y+1,al_makecol(1,41,213));
+                       end;
            end;
         if (bubbleList <> nil) then drawBubble(bubbleList);
         checkBubble(bubbleList);
