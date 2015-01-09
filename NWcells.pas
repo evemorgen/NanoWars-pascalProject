@@ -12,6 +12,8 @@ end;
 
 var komorkiNaPlanszy : array of komorka; //tablica dynamiczna o zmiennej dlugosci trzymająca wszystkie komórki występujące na planszy
 
+
+//funkcja inicjalizująca jedną komórkę.
 procedure initCell(ktoraKomorka, X,Y,points,size,id,spriteNr : integer);
 var i:integer;
 begin
@@ -24,6 +26,8 @@ begin
      komorkiNaPlanszy[ktoraKomorka].rmbc := 0;
 end;
 
+
+//po prostu rysowanie komórek.
 procedure drawCell(ktoraKomorka,dt: integer);
 begin
      if komorkiNaPlanszy[ktoraKomorka].ID = 1 then
@@ -32,11 +36,9 @@ begin
      if komorkiNaPlanszy[ktoraKomorka].ID = 0 then
         if komorkiNaPlanszy[ktoraKomorka].Rozmiar = 1 then al_draw_sprite(buffer,spriteRED[komorkiNaPlanszy[ktoraKomorka].spriteNr],komorkiNaPlanszy[ktoraKomorka].posX,komorkiNaPlanszy[ktoraKomorka].posY)
                                                       else al_masked_stretch_blit(spriteRED[komorkiNaPlanszy[ktoraKomorka].spriteNr],buffer,0,0,60,60,komorkiNaPlanszy[ktoraKomorka].posX,komorkiNaPlanszy[ktoraKomorka].posY,90,90);
-        //al_draw_sprite(buffer,spriteRED[komorkiNaPlanszy[ktoraKomorka].spriteNr],komorkiNaPlanszy[ktoraKomorka].posX,komorkiNaPlanszy[ktoraKomorka].posY);
-     if komorkiNaPlanszy[ktoraKomorka].ID = 2 then
+    if komorkiNaPlanszy[ktoraKomorka].ID = 2 then
         if komorkiNaPlanszy[ktoraKomorka].Rozmiar = 1 then al_draw_sprite(buffer,spriteWHITE[komorkiNaPlanszy[ktoraKomorka].spriteNr],komorkiNaPlanszy[ktoraKomorka].posX,komorkiNaPlanszy[ktoraKomorka].posY)
                                                       else al_masked_stretch_blit(spriteWHITE[komorkiNaPlanszy[ktoraKomorka].spriteNr],buffer,0,0,60,60,komorkiNaPlanszy[ktoraKomorka].posX,komorkiNaPlanszy[ktoraKomorka].posY,90,90);
-        //al_draw_sprite(buffer,spriteWHITE[komorkiNaPlanszy[ktoraKomorka].spriteNr],komorkiNaPlanszy[ktoraKomorka].posX,komorkiNaPlanszy[ktoraKomorka].posY);
 
      if (dt mod configTAB[3]) = 0 then komorkiNaPlanszy[ktoraKomorka].spriteNr := ((komorkiNaPlanszy[ktoraKomorka].spriteNr + 1) mod 16) +1; //wrazliwe animacje komorek
      if komorkiNaPlanszy[ktoraKomorka].ID <> 2 then
@@ -48,10 +50,12 @@ begin
 
 end;
 
+//procedura robiąca update statusu komórek.
+//komórki zwiększają swoją ilosć punktów w zależnosci od rozmiaru. Większe komórki rosną szybciej.
 procedure updateCells(dt : integer);
 var i : integer;
 begin
-     if (dt mod (configTAB[4]*100)) = 0 then //wrazliwe zwiekszanie szybkosci rosniecia babelkow
+     if (dt mod (configTAB[4]*100)) = 0 then //wrazliwe zwiekszanie szybkosci rosniecia komórek
         begin
         for i:= 1 to ilosc do
             begin //neutralne komorki nie rosna.
@@ -60,7 +64,8 @@ begin
         end
 end;
 
-
+//funkcja sprawdzająca czy wszystkie komórki na planszy należą do jednego gracza lub są neutralne
+//zwraca 0 jesli gra ma dalej trwać.
 function ifEnd():integer;
 var good  : integer;
     badd  : integer;

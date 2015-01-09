@@ -12,7 +12,7 @@ end;
 
 var komorkiNaPlanszy : array of komorka; //tablica dynamiczna o zmiennej dlugosci trzymająca wszystkie komórki występujące na planszy
 
-procedure initCell(ktoraKomorka, X,Y,points,size,id,promien,spriteNr : integer);
+procedure initCell(ktoraKomorka, X,Y,points,size,id,spriteNr : integer);
 var i:integer;
 begin
      komorkiNaPlanszy[ktoraKomorka].spriteNr := spriteNr;
@@ -20,7 +20,6 @@ begin
      komorkiNaPlanszy[ktoraKomorka].posY := Y;
      komorkiNaPlanszy[ktoraKomorka].punkty := points;
      komorkiNaPlanszy[ktoraKomorka].rozmiar := size;
-     komorkiNaPlanszy[ktoraKomorka].promien := promien;
      komorkiNaPlanszy[ktoraKomorka].ID := id;
      komorkiNaPlanszy[ktoraKomorka].rmbc := 0;
 end;

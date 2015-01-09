@@ -132,7 +132,8 @@ begin
         begin
         al_clear_bitmap(buffer);
         for i:=1 to ilosc do drawCell(i,zlicz); //tu trzeba potem poprawic
-        al_show_mouse(buffer);
+        //al_show_mouse(buffer);
+        al_draw_sprite(buffer,cursor,al_mouse_x,al_mouse_y); //nad tym trzeba pomysleć
         if (al_mouse_b AND 1) <> 0 then
            begin
            for i:=1 to ilosc do

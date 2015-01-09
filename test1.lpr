@@ -19,6 +19,7 @@ var klik                       : integer;
 var zlicz                      : integer;
 var flaga                      : integer;
 var zOnoFF                     : integer;
+var cursor                     : al_BITMAPptr;
 
 {$I NWsprites.pas}
 {$I NWcells.pas}
@@ -43,6 +44,7 @@ begin
   bubbleCount := 0;
   zOnOFF := 0;
   loadSprites;
+  cursor := al_load_bitmap('bc/cursor.pcx',NIL);
 
   buffer := al_create_bitmap(al_SCREEN_W,al_SCREEN_H);
   al_clear_bitmap(buffer);

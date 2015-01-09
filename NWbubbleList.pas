@@ -1,22 +1,25 @@
 
+//lista 'bąbelków' którymi strzelają do siebie komórki
 type pOnBubble = ^bubble;
 bubble = record
-posX     : integer;
-posY     : integer;
-destX    : integer;
-destY    : integer;
-punkty   : integer;
-incDecX  : integer;
-toNr     : integer;
-fromNr   : integer;
-interval : integer;
-distance : integer;
-nastepny : pOnBubble;
+posX     : integer;      //aktualna pozycja X
+posY     : integer;      //aktualna pozycja Y
+destX    : integer;      //pozycja docelowa X
+destY    : integer;      //pozycja docelowa Y
+punkty   : integer;      //ilosc punktów które niesie bąbelek
+incDecX  : integer;      //jednostka wedlug której porusza się bąbelek po X
+toNr     : integer;      //numer komórki do której leci bąbelek
+fromNr   : integer;      //numer komórki z  której leci bąbelek
+distance : integer;      //odleglosć którą ma bąbelek do przelecenia
+interval : integer;      //delay liczony w zależnosci od drogi jaką ma do przelecenia bąbelek,
+                         //zabieg mający na celu wyrównanie prędkosci z jaką lecą bąbelki w pionie i poziomie
+nastepny : pOnBubble;    //pointer wymagany przez listę
 end;
 
-var bubbleList : pOnBubble;
-var bubbleCount : integer;
+var bubbleList : pOnBubble;        //wlasciwa lista bąbelków
+var bubbleCount : integer;         //ilosć bąbelków licząca na bieżąco
 
+//procedura używana do testów gdy cos nie chce dzialać.
 procedure printBubble(lista:pOnBubble);
 var kopia : pOnBubble;
 begin
@@ -65,6 +68,9 @@ begin
      poprzedni := dodawany;
 end;
 
+
+//praktycznie nie używane ale może kiedys się przyda
+//poza tym, jak jest pushFRONT to czemu ma nie być pushBACK?
 procedure pushBACKbubble(var listeczka:pOnBubble;odd,doo:integer);
 var dodawany,biegaj: pOnBubble;
 begin

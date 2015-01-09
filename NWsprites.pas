@@ -1,3 +1,4 @@
+//Funkcja wczytująca sprite'y dla klatek komórek
 procedure loadSprites;
 var tmpString : string;
 begin
@@ -12,6 +13,7 @@ begin
            end;
 end;
 
+//Funkcja zwalniająca ram na koniec programu
 procedure destroySprites;
 begin
      for i:=1 to 16 do

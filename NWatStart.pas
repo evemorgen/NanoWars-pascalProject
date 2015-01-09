@@ -1,3 +1,4 @@
+//procedura w której znajdują się wszystkie rzeczy do inicjalizacji
 procedure initAll;
 begin
      al_init();
@@ -8,6 +9,9 @@ begin
 end;
 
 
+//aby za każdym uruchomieniem gry nie wybierać rozdzielczosci, delay'u między
+//klatkami itd. stworzylem plik tzw. config.
+//procedura wczytuje config o ile istnieje
 procedure loadCFG;
 var tmpString    : string;
 var cfg          : text;
@@ -27,6 +31,8 @@ begin
      close(cfg);
 end;
 
+//funkcja która pozwala użytkownikowi dobrać prędkosć animacji
+//powinno to być zrobione na timer'ach ale czasu braklo.
 function pickDelay1():integer;
 var del      : integer;
     zlicz    : integer;
@@ -59,6 +65,7 @@ begin
      pickDelay1 := del;
 end;
 
+//analogicznie j.w.
 function pickDelay2():integer;
 var del        : integer;
     zlicz      : integer;
@@ -109,6 +116,9 @@ begin
     pickDelay2 := del;
 end;
 
+
+//procedura realizuje możliwosć wyboru odpowiedniej rozdzielczosci, jednoczesnie zapisuje ją
+//do config'u jeżeli istnieje, jeżeli nie to go tworzy.
 procedure pickRes;
 var i,circlePoz :integer;
 var napis  : string;

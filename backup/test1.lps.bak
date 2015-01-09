@@ -9,11 +9,10 @@
         <Filename Value="test1.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="test1"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
         <TopLine Value="27"/>
-        <CursorPos X="20" Y="49"/>
+        <CursorPos X="55" Y="42"/>
         <UsageCount Value="130"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -46,8 +45,8 @@
         <UnitName Value="NWmenu"/>
         <EditorIndex Value="6"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="26"/>
-        <CursorPos X="24" Y="9"/>
+        <TopLine Value="1"/>
+        <CursorPos X="65" Y="37"/>
         <UsageCount Value="47"/>
         <Loaded Value="True"/>
       </Unit4>
@@ -56,7 +55,7 @@
         <UnitName Value="NWatStart"/>
         <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
+        <TopLine Value="136"/>
         <CursorPos X="75" Y="132"/>
         <UsageCount Value="47"/>
         <Loaded Value="True"/>
@@ -66,8 +65,8 @@
         <UnitName Value="NWbubbleList"/>
         <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="103"/>
-        <CursorPos X="68" Y="141"/>
+        <TopLine Value="184"/>
+        <CursorPos X="19" Y="119"/>
         <UsageCount Value="36"/>
         <Loaded Value="True"/>
       </Unit6>
@@ -76,7 +75,7 @@
         <UnitName Value="NWcells"/>
         <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
+        <TopLine Value="43"/>
         <CursorPos X="71" Y="15"/>
         <UsageCount Value="25"/>
         <Loaded Value="True"/>
@@ -94,10 +93,11 @@
       <Unit9>
         <Filename Value="NWgameEngine.pas"/>
         <UnitName Value="NWgameEngine"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="77"/>
-        <CursorPos X="5" Y="82"/>
+        <TopLine Value="120"/>
+        <CursorPos X="14" Y="125"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit9>
