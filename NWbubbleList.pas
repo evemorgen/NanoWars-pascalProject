@@ -41,7 +41,9 @@ begin
      dodawany^.fromNr := odd;
      dodawany^.toNr   := doo;
      dodawany^.punkty := komorkiNaPlanszy[odd].punkty div 2;
-     if komorkiNaPlanszy[odd].punkty mod 2 <> 0 then komorkiNaPlanszy[odd].punkty := (komorkiNaPlanszy[odd].punkty div 2)+1
+     if (doo = 0) or (doo = ilosc+1) or (odd = 0) or (odd = ilosc+1) then exit;
+     if (komorkiNaPlanszy[odd].punkty = 1) then exit;
+     if (komorkiNaPlanszy[odd].punkty mod 2 <> 0) then komorkiNaPlanszy[odd].punkty := (komorkiNaPlanszy[odd].punkty div 2)+1
                                                 else komorkiNaPlanszy[odd].punkty := (komorkiNaPlanszy[odd].punkty div 2);
      dodawany^.posX   := komorkiNaPlanszy[odd].posX+30;
      {

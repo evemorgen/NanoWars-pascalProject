@@ -8,6 +8,7 @@ promien   : integer;  //do kasacji
 ID        : integer;  //numerek okreslajacy do kogo nalezy komorka - 0 gracz,1 AI, 2 neutralna;
 spriteNr  : integer;  //numer obrazka do wyswietlenia
 rmbc      : integer;  //flaga okreslajaca czy prawy przycisk myszy byl klikniety na komorce
+ios       : integer;  //interval of shooting - zmienna okreslajaca co ile dana komorka AI moze strzelac
 end;
 
 var komorkiNaPlanszy : array of komorka; //tablica dynamiczna o zmiennej dlugosci trzymająca wszystkie komórki występujące na planszy
@@ -47,6 +48,7 @@ begin
      else
         if komorkiNaPlanszy[ktoraKomorka].rozmiar < 3 then al_textout_centre_ex (buffer, al_font, intToStr(komorkiNaPlanszy[ktoraKomorka].punkty),komorkiNaPlanszy[ktoraKomorka].posX + 30,komorkiNaPlanszy[ktoraKomorka].posY + 30, al_makecol (0, 0, 0), -1)
                                                       else al_textout_centre_ex (buffer, al_font, intToStr(komorkiNaPlanszy[ktoraKomorka].punkty),komorkiNaPlanszy[ktoraKomorka].posX + 45,komorkiNaPlanszy[ktoraKomorka].posY + 45, al_makecol (0, 0, 0), -1);
+     al_textout_centre_ex (buffer, al_font, intToStr(ktoraKomorka),komorkiNaPlanszy[ktoraKomorka].posX,komorkiNaPlanszy[ktoraKomorka].posY, al_makecol (255, 255, 255), -1);
 
 end;
 
@@ -75,8 +77,8 @@ begin
      badd := 0;
      for i:=1 to ilosc  do
            begin
-           if komorkiNaPlanszy[i].ID = 1 then good := good + 1;
-           if komorkiNaPlanszy[i].ID = 0 then badd := badd + 1;
+           if komorkiNaPlanszy[i].ID = 0 then good := good + 1;
+           if komorkiNaPlanszy[i].ID = 1 then badd := badd + 1;
            end;
      if (good =  0) and (badd <> 0) then ifEnd := (-1)*badd;
      if (good <> 0) and (badd =  0) then ifEnd := good;

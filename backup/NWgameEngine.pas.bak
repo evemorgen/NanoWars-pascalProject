@@ -1,3 +1,87 @@
+procedure levelEditor();
+var levelName : string;
+    znak      : integer;
+    bufforek  : al_BITMAPptr;
+    level     : text;
+    i,j       : integer;
+    ilosc     : integer;
+    zlicz     : integer;
+    stala     : integer;
+begin
+  ilosc := 0;
+  zlicz := 0;
+  stala := 100;
+  levelName := '';
+  bufforek := al_create_bitmap(al_SCREEN_W,al_SCREEN_H);
+  while al_key[al_KEY_ENTER] = 0 do
+        begin
+        al_clear_bitmap(bufforek);
+        al_textout_centre_ex (bufforek, al_font,'wpisz nazwe swojego lvlu', al_SCREEN_W DIV 2, (al_SCREEN_H DIV 2), al_makecol (255, 255, 255), -1);
+        al_textout_centre_ex (bufforek, al_font,'zatwierdz klawiszem ENTER', al_SCREEN_W DIV 2, (al_SCREEN_H DIV 2)+20, al_makecol (255, 255, 255), -1);
+        al_textout_centre_ex (bufforek, al_font,levelName, al_SCREEN_W DIV 2, (al_SCREEN_H DIV 2)+40, al_makecol (255, 255, 255), -1);
+        al_blit(bufforek,al_screen,0,0,0,0,al_SCREEN_W,al_SCREEN_H);
+        znak := al_readkey();
+        if znak = 16136 then levelName := copy(levelName,0,length(levelName)-1)
+        else levelName := levelName + char(znak);
+        end;
+  levelName := 'lvl\' + copy(levelName,0,length(levelName)-1) + '.lvl';
+  assign(level,levelName);
+  rewrite(level);
+
+  initCell(1,al_SCREEN_W-120,60+stala,10,1,0,random(16)+1);//ktoraKomorka, X,Y,points,size,id,spriteNr : integer
+  initCell(2,al_SCREEN_W-120,120+stala,10,3,0,random(16)+1);
+  initCell(3,al_SCREEN_W-120,210+stala,10,1,1,random(16)+1);
+  initCell(4,al_SCREEN_W-120,270+stala,10,3,1,random(16)+1);
+  initCell(5,al_SCREEN_W-120,360+stala,10,1,2,random(16)+1);
+  initCell(6,al_SCREEN_W-120,420+stala,10,3,2,random(16)+1);
+  al_rest(100);
+
+  while (al_key[al_KEY_ENTER] = 0) do
+        begin
+        al_clear_bitmap(buffer);
+        al_textout_centre_ex (buffer, al_font,'Nacisnij na komorke z prawej strony ekranu,', al_SCREEN_W DIV 2, 20, al_makecol (255, 255, 255), -1);
+        al_textout_centre_ex (buffer, al_font,'nastepnie przeciagnij ja we wlasciwe miejsce', al_SCREEN_W DIV 2, 40, al_makecol (255, 255, 255), -1);
+        al_textout_centre_ex (buffer, al_font,'aby zatwierdzic pozycje nacisnij spacje.', al_SCREEN_W DIV 2, 60, al_makecol (255, 255, 255), -1);
+        al_textout_centre_ex (buffer, al_font,'ABY ZAKOŃCZYĆ PRACĘ Z EDYTOREM NACIŚNIJ ENTER', al_SCREEN_W DIV 2, 80, al_makecol (255, 255, 255), -1);
+
+
+        for i := 1 to ilosc + 6 do
+            drawCell(i,zlicz);
+        for i := 1 to ilosc+6 do
+               begin
+               if ((al_mouse_b AND 1) <> 0) and (al_mouse_x >= komorkiNaPlanszy[i].posX) and (al_mouse_x <= komorkiNaPlanszy[i].posX + 60) and (al_mouse_y >= komorkiNaPlanszy[i].posY) and (al_mouse_y <= komorkiNaPlanszy[i].posY + 60) then
+                  begin
+                  ilosc := ilosc + 1;
+                  initCell(ilosc+6,al_mouse_x,al_mouse_y,10,komorkiNaPlanszy[i].rozmiar,komorkiNaPlanszy[i].ID,random(16)+1);
+                  al_rest(100);
+                  while (al_key[al_KEY_SPACE] = 0) do
+                        begin
+                        al_clear_bitmap(buffer);
+                        for j := 1 to ilosc + 6 do
+                            begin drawCell(j,zlicz); end;
+                        komorkiNaPlanszy[ilosc+6].posX := al_mouse_x;
+                        komorkiNaPlanszy[ilosc+6].posY := al_mouse_y;
+                        zlicz := (zlicz + 1) mod 10000;
+                        al_show_mouse(buffer);
+                        al_blit(buffer,al_screen,0,0,0,0,al_SCREEN_W,al_SCREEN_H);
+                        al_rest(1);
+                        end;
+                  end;
+               end;
+        zlicz := (zlicz + 1) mod 10000;
+        al_show_mouse(buffer);
+        al_blit(buffer,al_screen,0,0,0,0,al_SCREEN_W,al_SCREEN_H);
+        al_rest(1);
+        end;
+  for i:= 7 to ilosc+6 do
+      begin
+      write(level,komorkiNaPlanszy[i].posX,' ',komorkiNaPlanszy[i].posY,' ',komorkiNaPlanszy[i].punkty,' ',komorkiNaPlanszy[i].rozmiar,' ',komorkiNaPlanszy[i].ID);
+      if i <> ilosc+6 then writeln(level);
+      end;
+  close(level);
+end;
+
+
 function doSpacji(var tekst:string):string;
 var i : integer;
 var tmpString : string;
@@ -44,11 +128,13 @@ var i,j   : integer;
 var klik  : integer;
 begin
   klik := 0;
+  AIinit();
   while (al_key[AL_KEY_ESC] = 0) and (ifEnd() = 0) do
         begin
         al_clear_bitmap(buffer);
         for i:=1 to ilosc do drawCell(i,zlicz); //tu trzeba potem poprawic
-        al_show_mouse(buffer);
+        //al_show_mouse(buffer);
+        al_draw_sprite(buffer,cursor,al_mouse_x,al_mouse_y); //nad tym trzeba pomysleć
         if (al_mouse_b AND 1) <> 0 then
            begin
            for i:=1 to ilosc do
@@ -165,6 +251,24 @@ begin
                        al_line(buffer,komorkiNaPlanszy[klik].posX+45+1,komorkiNaPlanszy[klik].posY+45+1,al_mouse_x+1,al_mouse_y+1,al_makecol(1,41,213));
                        end;
            end;
+
+        /////////////////////////////////////
+        //                                 //
+        //     TU JEST MIEJSCE DLA AI      //
+        //                                 //
+        /////////////////////////////////////
+        if AIexpandeRandomALL(zlicz) = 0 then
+           if random(2000) = 339 then begin for i:=1 to 15 do AImassiveMssacre() end
+           else AIsendRandomALL(zlicz);
+
+        AIwatchDog(zlicz);
+
+        /////////////////////////////////////
+        //                                 //
+        //     TU JUŻ NIE                  //
+        //                                 //
+        /////////////////////////////////////
+
         if (bubbleList <> nil) then drawBubble(bubbleList);
         checkBubble(bubbleList);
         if (bubbleList <> nil) and ((zlicz mod configTAB[4]) = 0) then  //wrazliwe na predkosc lecenia babelkow
@@ -177,5 +281,5 @@ begin
         zlicz := (zlicz+1) mod 100000;
         al_rest(1);
         end;
-  bubbleList := nil;
+  bubbleList := nil;       //będzie leak pamieci, no trudno..
 end;

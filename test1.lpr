@@ -26,7 +26,10 @@ var cursor                     : al_BITMAPptr;
 {$I NWbubbleList.pas}
 {$I NWatStart.pas}
 {$I NWmenu.pas}
+{$I AI.pas}
+
 {$I NWgameEngine.pas}
+
 
 
 var cos : string;
@@ -53,10 +56,7 @@ begin
 
   //for i:= 1 to 7 do initCell(i,random(al_SCREEN_W-110)+55,random(al_SCREEN_H-110)+55,random(20)+10,1,random(3),random(16)+1); //ktoraKomorka, X,Y,points,size,id,promien
   //for i:= 8 to 10 do initCell(i,random(al_SCREEN_W-110)+55,random(al_SCREEN_H-110)+55,random(20)+10,3,random(3),random(16)+1); //ktoraKomorka, X,Y,points,size,id,promien
-  loadLevel('test2.lvl');
-  playLevel();
-
-  loadLevel('2.lvl');
+  loadLevel('44.lvl');
   playLevel();
 
   al_destroy_bitmap(buffer);

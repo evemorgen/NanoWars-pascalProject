@@ -128,6 +128,7 @@ var i,j   : integer;
 var klik  : integer;
 begin
   klik := 0;
+  AIinit();
   while (al_key[AL_KEY_ESC] = 0) and (ifEnd() = 0) do
         begin
         al_clear_bitmap(buffer);
@@ -250,6 +251,23 @@ begin
                        al_line(buffer,komorkiNaPlanszy[klik].posX+45+1,komorkiNaPlanszy[klik].posY+45+1,al_mouse_x+1,al_mouse_y+1,al_makecol(1,41,213));
                        end;
            end;
+
+        /////////////////////////////////////
+        //                                 //
+        //     TU JEST MIEJSCE DLA AI      //
+        //                                 //
+        /////////////////////////////////////
+        if AIexpandeRandomALL(zlicz) = 0 then
+           if random(2000) = 339 then begin for i:=1 to 15 do AImassiveMssacre() end
+           else AIsendRandomALL(zlicz);
+        AIwatchDog(zlicz);
+
+        /////////////////////////////////////
+        //                                 //
+        //     TU JUŻ NIE                  //
+        //                                 //
+        /////////////////////////////////////
+
         if (bubbleList <> nil) then drawBubble(bubbleList);
         checkBubble(bubbleList);
         if (bubbleList <> nil) and ((zlicz mod configTAB[4]) = 0) then  //wrazliwe na predkosc lecenia babelkow
@@ -262,5 +280,5 @@ begin
         zlicz := (zlicz+1) mod 100000;
         al_rest(1);
         end;
-  bubbleList := nil;
+  bubbleList := nil;       //będzie leak pamieci, no trudno..
 end;
