@@ -109,7 +109,7 @@ begin
      neutral := 0;
      for i:=1 to ilosc do
         if komorkiNaPlanszy[i].ID = 2 then neutral:= neutral + 1;
-     if neutral = 0 then begin AIexpandeRandomALL := 0; exit; end;
+     if neutral = 0 then begin AIexpandeRandomALL := -1; exit; end;
      for i:=1 to ilosc do
         begin
         if (komorkiNaPlanszy[i].ID = 1) and (zlicz mod komorkiNaPlanszy[i].ios = 0) then

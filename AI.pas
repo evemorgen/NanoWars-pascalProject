@@ -123,3 +123,8 @@ begin
      AIexpandeRandomALL := neutral;
 end;
 
+function AIexpandeNearONE(zlicz : integer):integer;
+begin
+
+end;
+

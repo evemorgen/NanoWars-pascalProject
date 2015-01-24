@@ -73,12 +73,11 @@ var del        : integer;
     pomoc      : pOnBubble;
 begin
     al_rest(100);
-    del := 2;
+    del := 30;
     zlicz := 0;
     bufforek := al_create_bitmap(al_SCREEN_W,al_SCREEN_H);
-    initCell(1,50 ,al_SCREEN_H div 2 + 120,random(20)+10,1,random(2),random(16)+1);
-    initCell(2,200,al_SCREEN_H div 2 + 120,random(20)+10,1,random(2),random(16)+1);
-    loadSprites;
+    initCell(1,-60 ,al_SCREEN_H div 2 + 120,random(20)+10,1,random(2),random(16)+1);
+    initCell(2,al_SCREEN_W,al_SCREEN_H div 2 + 120,random(20)+10,1,random(2),random(16)+1);
     while al_KEY[al_KEY_ENTER] = 0 do
        begin
        al_clear_bitmap(bufforek);
@@ -167,8 +166,7 @@ begin
         writeln(cfg,intToStr(width[circlePoz]));
         writeln(cfg,intToStr(height[circlePoz]));
         writeln(cfg,intToStr(pickDelay1()));
-        writeln(cfg,intToStr(2));
-        //writeln(cfg,intToStr(pickDelay2()));
+        writeln(cfg,intToStr(pickDelay2()));
         close(cfg);
         if width[circlePoz] > 1024 then wspolczynnikRozdzielczosci := 0
         else                            wspolczynnikRozdzielczosci := 1;

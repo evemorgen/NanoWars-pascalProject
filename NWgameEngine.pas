@@ -1,47 +1,3 @@
-procedure wygrana();
-begin
-  al_rest(100);
-  al_clear_bitmap(al_screen);
-  while (al_key[al_key_ENTER] = 0) and (al_key[al_KEY_q] = 0) and (al_key[al_KEY_Q] = 0) do
-        begin
-        al_textout_centre_ex (al_screen, al_font,'Brawo! Wygrales lamusie. Teraz nie bedzie tak latwo.', al_screen_W div 2, al_screen_H div 2, al_makecol (255, 255, 255), -1);
-        al_textout_centre_ex (al_screen, al_font,'wcisnij enter aby kontynuowac.', al_screen_W div 2, al_screen_H div 2 + 20, al_makecol (255, 255, 255), -1);
-        end;
-end;
-
-procedure przegrana();
-begin
-  al_clear_bitmap(al_screen);
-  while (al_key[al_key_ENTER] = 0) and (al_key[al_KEY_q] = 0) and (al_key[al_KEY_Q] = 0) do
-        begin
-        al_textout_centre_ex (al_screen, al_font,'Lamus. Nie martw sie, nastepnym razem bedzie lepiej. Moze.', al_screen_W div 2, al_screen_H div 2, al_makecol (255, 255, 255), -1);
-        al_textout_centre_ex (al_screen, al_font,'wcisnij enter aby kontynuowac.', al_screen_W div 2, al_screen_H div 2 + 20, al_makecol (255, 255, 255), -1);
-        end;
-end;
-
-procedure beforeStartLVL(lvlNr : integer);
-var doWyswietlenia : string;
-var bufforek       : al_BITMAPptr;
-var nazwy          : array of string;
-begin
-  Setlength(nazwy,6);
-  nazwy[1] := 'Here journey begins';
-  nazwy[2] := 'Learning fast, huh?';
-  nazwy[3] := 'That was easy. Wasnt it?';
-  nazwy[4] := 'Circles, circles everywhere';
-  nazwy[5] := 'utlimate FUCKING HARD challenge.';
-  bufforek := al_create_bitmap(al_SCREEN_W,al_SCREEN_H);
-  al_clear_bitmap(bufforek);
-  doWyswietlenia := 'Stage ' + intToStr(lvlNr) + '. ' + nazwy[lvlNr];
-  while al_key[al_KEY_ENTER] = 0 do
-        begin
-        al_textout_centre_ex (bufforek, al_font,doWyswietlenia, al_screen_W div 2, al_screen_H div 2, al_makecol (255, 255, 255), -1);
-        al_textout_centre_ex (bufforek, al_font,'enter', al_screen_W div 2, al_screen_H div 2 + 20, al_makecol (255, 255, 255), -1);
-
-        al_blit(bufforek,al_screen,0,0,0,0,al_SCREEN_W,al_SCREEN_H);
-        end;
-end;
-
 procedure levelEditor();
 var levelName : string;
     znak      : integer;
@@ -167,15 +123,13 @@ begin
 end;
 
 
-function playLevel(): integer;
+procedure playLevel;
 var i,j   : integer;
-    klik  : integer;
-    czyKon: integer;
+var klik  : integer;
 begin
   klik := 0;
-  czyKon := 0;
   AIinit();
-  while (al_key[AL_KEY_ESC] = 0) and (czyKon = 0) and (al_key[al_KEY_q] = 0) and (al_key[al_KEY_Q] = 0) do
+  while (al_key[AL_KEY_ESC] = 0) and (ifEnd() = 0) do
         begin
         al_clear_bitmap(buffer);
         for i:=1 to ilosc do drawCell(i,zlicz); //tu trzeba potem poprawic
@@ -303,7 +257,7 @@ begin
         //     TU JEST MIEJSCE DLA AI      //
         //                                 //
         /////////////////////////////////////
-        if (AIexpandeRandomALL(zlicz) = 0) or (random(1000) < 100) then
+        if AIexpandeRandomALL(zlicz) = 0 then
            if random(2000) = 339 then begin for i:=1 to 15 do AImassiveMssacre() end
            else AIsendRandomALL(zlicz);
         AIwatchDog(zlicz);
@@ -321,13 +275,10 @@ begin
              updateBubble(bubbleList,zlicz);
         end;
         updateCells(zlicz);
-        al_textout_ex(buffer, al_font,'wcisnij Q aby uciekac!',10,10, al_makecol (255, 255, 255), -1);
+
         al_blit(buffer,al_screen,0,0,0,0,al_SCREEN_W,al_SCREEN_H);
         zlicz := (zlicz+1) mod 100000;
         al_rest(1);
-        czyKon := ifEnd();
-        if (al_key[al_KEY_q] <> 0) or (al_key[al_KEY_Q] <> 0) then playLevel := 0;
         end;
   bubbleList := nil;       //będzie leak pamieci, no trudno..
-  playLevel := czyKon;
 end;
