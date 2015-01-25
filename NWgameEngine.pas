@@ -124,6 +124,7 @@ begin
       if i <> ilosc+6 then writeln(level);
       end;
   close(level);
+  al_rest(100);
 end;
 
 
@@ -139,12 +140,6 @@ begin
   doSpacji := tmpString;
 end;
 
-procedure wczytajLvlZklawiatury();
-begin
-
-end;
-
-
 procedure loadLevel(levelFile:string);
 var level     : text;
     tmpString : string;
@@ -152,11 +147,13 @@ var level     : text;
     X,Y,P,S,ID: integer;
 begin
      i := 1;
+     if pos('.lvl',levelFile) = 0 then levelFile := levelFile + '.' + 'lvl';
      tmpString := 'lvl/'+levelFile;
-     writeln(tmpString);
+     //writeln(tmpString);
+     //readln;
      assign(level,tmpString);
+     //readln;
      reset(level);
-
      while eof(level) = false do
            begin
            readln(level,tmpString);
@@ -337,3 +334,29 @@ begin
   bubbleList := nil;       //będzie leak pamieci, no trudno..
   playLevel := czyKon;
 end;
+
+
+procedure wczytajLvlZklawiatury();
+var bufforek : al_BITMAPptr;
+    levelName: string[30];
+    drugiStr : string[30];
+    znak : integer;
+begin
+   bufforek := al_create_bitmap(al_SCREEN_W,al_SCREEN_H);
+   levelName := '';
+   while al_key[al_KEY_ENTER] = 0 do
+        begin
+        al_clear_bitmap(bufforek);
+        al_textout_centre_ex (bufforek, al_font,'wpisz nazwe swojego lvlu', al_SCREEN_W DIV 2, (al_SCREEN_H DIV 2), al_makecol (255, 255, 255), -1);
+        al_textout_centre_ex (bufforek, al_font,'zatwierdz klawiszem ENTER', al_SCREEN_W DIV 2, (al_SCREEN_H DIV 2)+20, al_makecol (255, 255, 255), -1);
+        al_textout_centre_ex (bufforek, al_font,levelName, al_SCREEN_W DIV 2, (al_SCREEN_H DIV 2)+40, al_makecol (255, 255, 255), -1);
+        al_blit(bufforek,al_screen,0,0,0,0,al_SCREEN_W,al_SCREEN_H);
+        znak := al_readkey();
+        if znak = 16136 then levelName := copy(levelName,0,length(levelName)-1)
+                        else levelName := levelName + char(znak);
+        end;
+   levelName := copy(levelName,1,length(levelName)-1);
+   loadLevel(levelName);
+   playLevel();
+end;
+

@@ -53,11 +53,19 @@ begin
   buffer := al_create_bitmap(al_SCREEN_W,al_SCREEN_H);
   al_clear_bitmap(buffer);
 
+  loadLevel('pierwszy.lvl');
+  playLevel();
+
   while true do
   begin
+  al_rest(100);
   jakzyc := menu();
-  if jakzyc = 3 then exit;
-  if jakzyc = 2 then leveleditor();
+  al_remove_keyboard;
+  al_rest(100);
+  al_install_keyboard;
+  if jakzyc = 4 then exit;
+  if jakzyc = 3 then leveleditor;
+  if jakzyc = 2 then wczytajLvlZklawiatury();
   if jakzyc = 1 then break;
   end;
   //for i:= 1 to 7 do initCell(i,random(al_SCREEN_W-110)+55,random(al_SCREEN_H-110)+55,random(20)+10,1,random(3),random(16)+1); //ktoraKomorka, X,Y,points,size,id,promien

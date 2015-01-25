@@ -55,9 +55,13 @@ begin
 
   while true do
   begin
+  al_rest(100);
   jakzyc := menu();
+  al_remove_keyboard;
+  al_rest(100);
+  al_install_keyboard;
   if jakzyc = 4 then exit;
-  if jakzyc = 3 then leveleditor();
+  if jakzyc = 3 then leveleditor;
   if jakzyc = 2 then wczytajLvlZklawiatury();
   if jakzyc = 1 then break;
   end;
