@@ -35,13 +35,13 @@ var cursor                     : al_BITMAPptr;
 var cos : string;
     nazwaLVL : string;
     numer    : integer;
+    jakzyc   : integer;
 begin
   initAll();
 
   Setlength(komorkiNaPlanszy,256);                    //brzydkie rozwiązanie ale dziala :D
 
   pickRes();
-  //menu();
   ilosc := 10;
   klik := 0;
   zlicz := 0;
@@ -53,13 +53,20 @@ begin
   buffer := al_create_bitmap(al_SCREEN_W,al_SCREEN_H);
   al_clear_bitmap(buffer);
 
-  //levelEditor();
-
+  while true do
+  begin
+  jakzyc := menu();
+  if jakzyc = 4 then exit;
+  if jakzyc = 3 then leveleditor();
+  if jakzyc = 2 then wczytajLvlZklawiatury();
+  if jakzyc = 1 then break;
+  end;
   //for i:= 1 to 7 do initCell(i,random(al_SCREEN_W-110)+55,random(al_SCREEN_H-110)+55,random(20)+10,1,random(3),random(16)+1); //ktoraKomorka, X,Y,points,size,id,promien
   //for i:= 8 to 10 do initCell(i,random(al_SCREEN_W-110)+55,random(al_SCREEN_H-110)+55,random(20)+10,3,random(3),random(16)+1); //ktoraKomorka, X,Y,points,size,id,promien
   numer := 1;
   while numer <> 5 do
   begin
+  al_rest(100);
   nazwaLVL := intToStr(numer) + '.lvl';
   beforeStartLVL(numer);
   al_rest(100);

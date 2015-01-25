@@ -52,6 +52,7 @@ var levelName : string;
     zlicz     : integer;
     stala     : integer;
 begin
+  al_rest(100);
   ilosc := 0;
   zlicz := 0;
   stala := 100;
@@ -136,6 +137,11 @@ begin
   tmpString := copy(tekst,1,i-1);
   tekst := copy(tekst,i+1,length(tekst));
   doSpacji := tmpString;
+end;
+
+procedure wczytajLvlZklawiatury();
+begin
+
 end;
 
 

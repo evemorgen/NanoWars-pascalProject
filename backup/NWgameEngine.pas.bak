@@ -2,7 +2,7 @@ procedure wygrana();
 begin
   al_rest(100);
   al_clear_bitmap(al_screen);
-  while al_keypressed = true do
+  while (al_key[al_key_ENTER] = 0) and (al_key[al_KEY_q] = 0) and (al_key[al_KEY_Q] = 0) do
         begin
         al_textout_centre_ex (al_screen, al_font,'Brawo! Wygrales lamusie. Teraz nie bedzie tak latwo.', al_screen_W div 2, al_screen_H div 2, al_makecol (255, 255, 255), -1);
         al_textout_centre_ex (al_screen, al_font,'wcisnij enter aby kontynuowac.', al_screen_W div 2, al_screen_H div 2 + 20, al_makecol (255, 255, 255), -1);
@@ -52,6 +52,7 @@ var levelName : string;
     zlicz     : integer;
     stala     : integer;
 begin
+  al_rest(100);
   ilosc := 0;
   zlicz := 0;
   stala := 100;
