@@ -147,7 +147,7 @@ var level     : text;
     X,Y,P,S,ID: integer;
 begin
      i := 1;
-     //if pos('.lvl',levelFile) = 0 then levelFile := levelFile + '.' + 'lvl';
+     if pos('.lvl',levelFile) = 0 then levelFile := levelFile + '.' + 'lvl';
      tmpString := 'lvl/'+levelFile;
      //writeln(tmpString);
      //readln;

@@ -17,7 +17,7 @@ nastepny : pOnBubble;    //pointer wymagany przez listę
 end;
 
 var bubbleList : pOnBubble;        //wlasciwa lista bąbelków
-var bubbleCount : integer;         //ilosć bąbelków licząca na bieżąco
+var bubbleCount : integer;         //ilosć bąbelków liczona na bieżąco
 
 //procedura używana do testów gdy cos nie chce dzialać.
 procedure printBubble(lista:pOnBubble);
@@ -32,6 +32,7 @@ begin
            end;
 end;
 
+//procedura wrzucająca bombelek do listy
 procedure pushFRONTbubble(var poprzedni:pOnBubble;odd,doo:integer);
 var dodawany : pOnBubble;
 begin
@@ -41,13 +42,13 @@ begin
      dodawany^.fromNr := odd;
      dodawany^.toNr   := doo;
      dodawany^.punkty := komorkiNaPlanszy[odd].punkty div 2;
-     if (doo = 0) or (doo = ilosc+1) or (odd = 0) or (odd = ilosc+1) then exit;
-     if (komorkiNaPlanszy[odd].punkty = 1) then exit;
+     if (doo = 0) or (doo = ilosc+1) or (odd = 0) or (odd = ilosc+1) then exit; //jakis dziwny bląd musialby wystąpić
+     if (komorkiNaPlanszy[odd].punkty = 1) then exit; //wysylanie bombelków z ilosci a punktów 0 jest bez sensu
      if (komorkiNaPlanszy[odd].punkty mod 2 <> 0) then komorkiNaPlanszy[odd].punkty := (komorkiNaPlanszy[odd].punkty div 2)+1
                                                 else komorkiNaPlanszy[odd].punkty := (komorkiNaPlanszy[odd].punkty div 2);
      dodawany^.posX   := komorkiNaPlanszy[odd].posX+30;
      {
-     if komorkiNaPlanszy[doo].rozmiar < 3 then
+     if komorkiNaPlanszy[doo].rozmiar < 3 then //miala być obsluga różnych rozmiarów komórek ale braklo czasu
         begin}
         dodawany^.posX   := komorkiNaPlanszy[odd].posX+30;
         dodawany^.posY   := komorkiNaPlanszy[odd].posY+30;
@@ -98,7 +99,7 @@ begin
      biegaj^.nastepny := dodawany;
 end;
 
-procedure popFRONTbubble(var listeczka:pOnBubble);
+procedure popFRONTbubble(var listeczka:pOnBubble); //usuwanie bombelków jak już nie są potrzebne
 begin
      bubbleCount := bubbleCount-1;
      if listeczka <> nil then
@@ -108,7 +109,7 @@ begin
      end;
 end;
 
-procedure popBACKbubble(var listeczka:pOnBubble);
+procedure popBACKbubble(var listeczka:pOnBubble); //jak wyżej
 var pomoc:pOnBubble;
 begin
      bubbleCount := bubbleCount-1;
@@ -119,7 +120,7 @@ begin
      pomoc^.nastepny := nil;
 end;
 
-procedure popMIDDLEbubble(var listeczka:pOnBubble;ktory : integer);
+procedure popMIDDLEbubble(var listeczka:pOnBubble;ktory : integer); //nawet nie pamietam po co to zaimplementowalem
 var i:integer;
     pomoc : pOnBubble;
 begin
@@ -143,7 +144,7 @@ begin
 end;
 
 
-procedure checkBubble(var listeczka:pOnBubble);
+procedure checkBubble(var listeczka:pOnBubble); //procedura sprawdza czy bombelki nie dotarly już do celu
 var pomoc : pOnBubble;
     i     : integer;
     z     : integer;
@@ -176,7 +177,7 @@ begin
      until z=0;
 end;
 
-procedure drawBubble(var listeczka:pOnBubble);
+procedure drawBubble(var listeczka:pOnBubble);  //procedura rysująca bombelki
 var pomoc : pOnBubble;
 begin
      pomoc := listeczka;
@@ -198,7 +199,7 @@ begin
            end;
 end;
 
-procedure updateBubble(var listeczka: pOnBubble;dt:integer);
+procedure updateBubble(var listeczka: pOnBubble;dt:integer); //update statusu bombelków
 var pomoc : pOnBubble;
 begin
      pomoc := listeczka;
@@ -213,6 +214,7 @@ begin
                  pomoc^.posY := pomoc^.posY * (pomoc^.posX - (komorkiNaPlanszy[pomoc^.fromNr].posX+30));
                  pomoc^.posY := pomoc^.posY div ((komorkiNaPlanszy[pomoc^.toNr].posX+30) - (komorkiNaPlanszy[pomoc^.fromNr].posX+30));
                  pomoc^.posY := pomoc^.posY + komorkiNaPlanszy[pomoc^.fromNr].posY + 30;
+                 //obliczanie ze wzoru na prostą przechodzącą przez 2 punkty.
                  end
               else
                  begin

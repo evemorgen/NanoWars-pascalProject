@@ -1,4 +1,4 @@
-type latajacyKrwinek = record
+type latajacyKrwinek = record  //Absolutnie nie pamiętam do czego mi jest potrzebna ta struktura
 posX                 : integer;
 posY                 : integer;
 dodaj1               : integer;
@@ -8,6 +8,7 @@ spriteNr             : integer;
 interval             : integer;
 end;
 
+  //funkcja realizująca funkcję menu.
 function menu():integer;    //3-wyjscie, 2-zaladuj lvl, 1-graj
 var buffor     : al_BITMAPptr;
     ileKrwinek : integer;

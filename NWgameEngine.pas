@@ -1,4 +1,4 @@
-procedure wygrana();
+procedure wygrana();    //procedura wypisująca komunikat o wygranej
 begin
   al_rest(100);
   al_clear_bitmap(al_screen);
@@ -9,7 +9,7 @@ begin
         end;
 end;
 
-procedure przegrana();
+procedure przegrana();  //procedura wypisująca komunikat o przegranej
 begin
   al_clear_bitmap(al_screen);
   while (al_key[al_key_ENTER] = 0) and (al_key[al_KEY_q] = 0) and (al_key[al_KEY_Q] = 0) do
@@ -19,7 +19,7 @@ begin
         end;
 end;
 
-procedure beforeStartLVL(lvlNr : integer);
+procedure beforeStartLVL(lvlNr : integer);  //plansza przed poziomem z ambitnym tekstem.
 var doWyswietlenia : string;
 var bufforek       : al_BITMAPptr;
 var nazwy          : array of string;
@@ -42,7 +42,7 @@ begin
         end;
 end;
 
-procedure levelEditor();
+procedure levelEditor(); //procedura pozwalająca graczowi na tworzenie wlasnych leveli
 var levelName : string;
     znak      : integer;
     bufforek  : al_BITMAPptr;
@@ -58,7 +58,7 @@ begin
   stala := 100;
   levelName := '';
   bufforek := al_create_bitmap(al_SCREEN_W,al_SCREEN_H);
-  while al_key[al_KEY_ENTER] = 0 do
+  while al_key[al_KEY_ENTER] = 0 do                     //modul obslugujący wczytywanie nazwy dla lvlu
         begin
         al_clear_bitmap(bufforek);
         al_textout_centre_ex (bufforek, al_font,'wpisz nazwe swojego lvlu', al_SCREEN_W DIV 2, (al_SCREEN_H DIV 2), al_makecol (255, 255, 255), -1);
@@ -70,10 +70,10 @@ begin
         else levelName := levelName + char(znak);
         end;
   levelName := 'lvl\' + copy(levelName,0,length(levelName)-1) + '.lvl';
-  assign(level,levelName);
+  assign(level,levelName);                              //Otwieram plik dla poziomu
   rewrite(level);
 
-  initCell(1,al_SCREEN_W-120,60+stala,10,1,0,random(16)+1);//ktoraKomorka, X,Y,points,size,id,spriteNr : integer
+  initCell(1,al_SCREEN_W-120,60+stala,10,1,0,random(16)+1);        //komórki z boku do przeciągania
   initCell(2,al_SCREEN_W-120,120+stala,10,3,0,random(16)+1);
   initCell(3,al_SCREEN_W-120,210+stala,10,1,1,random(16)+1);
   initCell(4,al_SCREEN_W-120,270+stala,10,3,1,random(16)+1);
@@ -81,7 +81,7 @@ begin
   initCell(6,al_SCREEN_W-120,420+stala,10,3,2,random(16)+1);
   al_rest(100);
 
-  while (al_key[al_KEY_ENTER] = 0) do
+  while (al_key[al_KEY_ENTER] = 0) do                       //gdy gracz wcisnie enter kończymy pracę z edytorem
         begin
         al_clear_bitmap(buffer);
         al_textout_centre_ex (buffer, al_font,'Nacisnij na komorke z prawej strony ekranu,', al_SCREEN_W DIV 2, 20, al_makecol (255, 255, 255), -1);
@@ -94,12 +94,13 @@ begin
             drawCell(i,zlicz);
         for i := 1 to ilosc+6 do
                begin
+               //ten dlugawy if sprawdza czy wcisnieto LKM i czy kursor znajduje się na którejs komorce
                if ((al_mouse_b AND 1) <> 0) and (al_mouse_x >= komorkiNaPlanszy[i].posX) and (al_mouse_x <= komorkiNaPlanszy[i].posX + 60) and (al_mouse_y >= komorkiNaPlanszy[i].posY) and (al_mouse_y <= komorkiNaPlanszy[i].posY + 60) then
                   begin
                   ilosc := ilosc + 1;
                   initCell(ilosc+6,al_mouse_x,al_mouse_y,10,komorkiNaPlanszy[i].rozmiar,komorkiNaPlanszy[i].ID,random(16)+1);
                   al_rest(100);
-                  while (al_key[al_KEY_SPACE] = 0) do
+                  while (al_key[al_KEY_SPACE] = 0) do //dopóki nie wcisnieto spacji to komórka jest przypięta do myszki
                         begin
                         al_clear_bitmap(buffer);
                         for j := 1 to ilosc + 6 do
@@ -128,7 +129,7 @@ begin
 end;
 
 
-function doSpacji(var tekst:string):string;
+function doSpacji(var tekst:string):string; //funkcja pomocnicza sprawdzająca gdzie jest spacja. I zwracająca caly tekst do spacji
 var i : integer;
 var tmpString : string;
 begin
@@ -140,7 +141,7 @@ begin
   doSpacji := tmpString;
 end;
 
-procedure loadLevel(levelFile:string);
+procedure loadLevel(levelFile:string); //procedura wczytująca poziom z pliku
 var level     : text;
     tmpString : string;
     i         : integer;
@@ -149,10 +150,7 @@ begin
      i := 1;
      if pos('.lvl',levelFile) = 0 then levelFile := levelFile + '.' + 'lvl';
      tmpString := 'lvl/'+levelFile;
-     //writeln(tmpString);
-     //readln;
      assign(level,tmpString);
-     //readln;
      reset(level);
      while eof(level) = false do
            begin
@@ -170,19 +168,18 @@ begin
 end;
 
 
-function playLevel(): integer;
+function playLevel(): integer;                 //glowna pętla gry tak naprawdę, zbyt zawile by tlumaczyć
 var i,j   : integer;
     klik  : integer;
     czyKon: integer;
 begin
   klik := 0;
   czyKon := 0;
-  AIinit();
+  AIinit(); //inicjalizacja AI
   while (al_key[AL_KEY_ESC] = 0) and (czyKon = 0) and (al_key[al_KEY_q] = 0) and (al_key[al_KEY_Q] = 0) do
         begin
         al_clear_bitmap(buffer);
         for i:=1 to ilosc do drawCell(i,zlicz); //tu trzeba potem poprawic
-        //al_show_mouse(buffer);
         al_draw_sprite(buffer,cursor,al_mouse_x,al_mouse_y); //nad tym trzeba pomysleć
         if (al_mouse_b AND 1) <> 0 then
            begin
@@ -336,7 +333,7 @@ begin
 end;
 
 
-procedure wczytajLvlZklawiatury();
+procedure wczytajLvlZklawiatury(); //procedura pozwalająca graczowi wczytanie lvlu o dowolnej nazwie
 var bufforek : al_BITMAPptr;
     levelName: string[30];
     drugiStr : string[30];

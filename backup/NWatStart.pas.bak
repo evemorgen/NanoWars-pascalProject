@@ -167,7 +167,8 @@ begin
         writeln(cfg,intToStr(width[circlePoz]));
         writeln(cfg,intToStr(height[circlePoz]));
         writeln(cfg,intToStr(pickDelay1()));
-        writeln(cfg,intToStr(pickDelay2()));
+        writeln(cfg,intToStr(2));
+        //writeln(cfg,intToStr(pickDelay2()));
         close(cfg);
         if width[circlePoz] > 1024 then wspolczynnikRozdzielczosci := 0
         else                            wspolczynnikRozdzielczosci := 1;

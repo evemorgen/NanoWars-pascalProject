@@ -66,6 +66,7 @@ begin
 end;
 
 //analogicznie j.w.
+//w pewnym momencie przestalo dzialać, kochany pascal
 function pickDelay2():integer;
 var del        : integer;
     zlicz      : integer;

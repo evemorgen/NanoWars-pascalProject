@@ -6,20 +6,20 @@ uses dos, crt, allegro, sysutils;
 
 
 var configTAB                  : array of integer; //tablica dynamiczna zawierąca wszystkie dane z configu
-var i,j                        : integer;
+var i,j                        : integer;          //iteratory
 var rMouseBTAB                 : array of integer;
-var buffer                     : al_BITMAPptr;
+var buffer                     : al_BITMAPptr;     //glowna bitmapa na którą rysuje
 var wspolczynnikRozdzielczosci : integer;      //1 dla 4:3, 0 dla 16:9
 var sprite                     : al_BITMAPptr;
-var spriteBLUE                 : array[1..16] of al_BITMAPptr;
-var spriteRED                  : array[1..16] of al_BITMAPptr;
-var spriteWHITE                : array[1..16] of al_BITMAPptr;
-var ilosc                      : integer;
-var klik                       : integer;
+var spriteBLUE                 : array[1..16] of al_BITMAPptr; //tablica trzymająca poszczególne klatki animacji
+var spriteRED                  : array[1..16] of al_BITMAPptr; //j.w
+var spriteWHITE                : array[1..16] of al_BITMAPptr; //j.w
+var ilosc                      : integer;                      //zmienna okreslajaca ile aktualnie komórek znajduje się na planszy
+var klik                       : integer;                      //
 var zlicz                      : integer;
 var flaga                      : integer;
 var zOnoFF                     : integer;
-var cursor                     : al_BITMAPptr;
+var cursor                     : al_BITMAPptr;                 //bitmapa trzymająca wygląd kursora
 
 {$I NWsprites.pas}
 {$I NWcells.pas}
@@ -52,9 +52,6 @@ begin
 
   buffer := al_create_bitmap(al_SCREEN_W,al_SCREEN_H);
   al_clear_bitmap(buffer);
-
-  loadLevel('pierwszy.lvl');
-  playLevel();
 
   while true do
   begin

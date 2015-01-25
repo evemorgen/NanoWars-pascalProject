@@ -1,4 +1,4 @@
-procedure AIinit();
+procedure AIinit();     //inicjalizacja AI
 var i : integer;
     interval : integer;
 begin
@@ -12,7 +12,7 @@ begin
          end;
 end;
 
-procedure AIsendRandomALL(zlicz : integer);
+procedure AIsendRandomALL(zlicz : integer); //AI wysyla calkiem losowo ze wszystkich pociski w inna komorke.
 var i : integer;
     los: integer;
 begin
@@ -28,7 +28,7 @@ begin
          end;
 end;
 
-procedure AIsendRandomONE(zlicz : integer);
+procedure AIsendRandomONE(zlicz : integer); //AI wysyla losowa z jednej w inna komorke
 var losowaZ : integer;
     losowaDo: integer;
 begin
@@ -44,12 +44,12 @@ begin
      if zlicz mod komorkiNaPlanszy[losowaZ].ios = 0 then pushFRONTBubble(bubbleList,losowaZ,losowaDo);
 end;
 
-procedure AImassiveMssacre();
+procedure AImassiveMssacre(); //Wysylanie duzej ilosci pociskow w malym okresie
 begin
      AIsendRandomONE(0);
 end;
 
-procedure AIwatchDog(zlicz : integer);
+procedure AIwatchDog(zlicz : integer); //mechanizm dostosowania częstotliwosci wysylania pocisków przez AI
 var i : integer;
     good : integer;
     baad : integer;
@@ -80,7 +80,7 @@ begin
           end;
 end;
 
-function AIexpandeRandomONE(zlicz : integer):integer;
+function AIexpandeRandomONE(zlicz : integer):integer;            //AI nie ataktuje przeciwnika, zajmuje wolne, nieutralne komorki
 var losowaZ : integer;
     losowaDo: integer;
     neutral : integer;
@@ -101,7 +101,7 @@ begin
      AIexpandeRandomONE := neutral;
 end;
 
-function AIexpandeRandomALL(zlicz : integer):integer;
+function AIexpandeRandomALL(zlicz : integer):integer;            //to samo co wyżej tylko dla wszystkich
 var los     : integer;
     neutral : integer;
     i       : integer;
